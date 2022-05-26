@@ -43,25 +43,25 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-          CT
+        <a href="#" class="simple-text logo-mini">
+
         </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          Creative Tim
+        <a href="#" class="simple-text logo-normal">
+          Incentive
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li class="active ">
+          <li>
             <a href="main.php?page=dashboard">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
           </li>
           <li>
-            <a href="./icons.html">
+            <a href="main.php?page=timestamp">
               <i class="now-ui-icons education_atom"></i>
-              <p>Icons</p>
+              <p>Timestamp</p>
             </a>
           </li>
 
@@ -72,6 +72,10 @@
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
         <div class="container-fluid">
+          <div class="navbar-wrapper">
+
+            <a class="navbar-brand" style="color: #000000;">INCENTIVE</a>
+          </div>
 
 
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
@@ -80,12 +84,12 @@
 
 
               <li class="nav-item">
-                <a class="nav-link" href="#pablo">
-                  <i class="now-ui-icons users_single-02"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Account</span>
-                  </p>
+
+                <a class="nav-link" href="#pablo" style="color: #000000;">
+                  <img src="img/icon/user_icon.PNG" alt="user" class="rounded-circle" width="40" height="40">
+                  <span>User Test Test</span>
                 </a>
+
               </li>
             </ul>
           </div>
@@ -94,7 +98,7 @@
       <!-- End Navbar -->
       <div class="panel-header panel-header-sm">
       </div>
-      <hr>
+      <br><br>
       <div class="content">
 
         <!-- เนื้อหา -->
@@ -104,13 +108,17 @@
         switch ($strAction) {
 
           case "dashboard":
-            include("menu_dashboard/dashboard.html");
+            include("menu_dashboard/dashboard.php");
+            break;
+
+          case "timestamp":
+            include("menu_timestamp/timestamp.php");
             break;
 
 
 
           default:
-            include("menu_dashboard/dashboard.html");
+            include("menu_dashboard/dashboard.php");
         }
         ?>
 
