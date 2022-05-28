@@ -34,6 +34,13 @@
   <link href="../assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../assets/demo/demo.css" rel="stylesheet" />
+
+  <!-- Jqurey -->
+  <link rel="stylesheet" href="src/jquery-ui.css">
+  <script src="../assets/jquery/jquery.min.js"></script>
+  <script src="../assets/jquery/jquery-ui.js"></script>
+
+  
 </head>
 
 <body class="">
