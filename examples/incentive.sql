@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : Mysql_Me
+ Source Server         : ME_mysql
  Source Server Type    : MySQL
  Source Server Version : 100411
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 27/05/2022 21:54:22
+ Date: 28/05/2022 17:48:17
 */
 
 SET NAMES utf8mb4;
@@ -123,17 +123,29 @@ CREATE TABLE `tbstaff`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `tbtimestamp`;
 CREATE TABLE `tbtimestamp`  (
-  `timestampID` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `staffID` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `timestampLate` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `timestampAbsence` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `timestampDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `addDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `addBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `timestampID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `staffID` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `timestampLate` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `timestampAbsence` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `timestampDate` date NULL DEFAULT NULL,
+  `addDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `addBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `editDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `editBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`timestampID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tbtimestamp
+-- ----------------------------
+INSERT INTO `tbtimestamp` VALUES (1, '1', '2', '3', '2023-04-28', '2022-05-28', 'test', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (2, '2', '2', '3', '2023-04-28', '2022-05-28', 'test', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (3, '3', '2', '3', '2023-04-28', '2022-05-28', 'test', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (4, '4', '2', '3', '2023-04-28', '2022-05-28', 'test', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (5, '5', '2', '3', '2023-04-28', '2022-05-28', 'test', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (6, '6', '1', '1', '2023-04-28', '2022-05-28', 'test', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (7, '7', '1', '1', '2023-04-28', '2022-05-28', 'test', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (8, '8', '1', '1', '2023-04-28', '2022-05-28', 'test', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tbwarning
