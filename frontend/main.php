@@ -40,12 +40,12 @@
   <script src="../assets/jquery/jquery.min.js"></script>
   <script src="../assets/jquery/jquery-ui.js"></script>
 
-  
+
 </head>
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="crimson" >
+    <div class="sidebar" data-color="crimson">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
@@ -67,8 +67,14 @@
           </li>
           <li>
             <a href="main.php?page=timestamp">
-              <i class="now-ui-icons education_atom"></i>
+              <i class="now-ui-icons tech_watch-time"></i>
               <p>Timestamp</p>
+            </a>
+          </li>
+          <li>
+            <a href="main.php?page=setting">
+              <i class="now-ui-icons loader_gear"></i>
+              <p>Setting</p>
             </a>
           </li>
 
@@ -122,6 +128,9 @@
             include("menu_timestamp/timestamp.php");
             break;
 
+          case "setting":
+            include("menu_setting/setting.php");
+            break;
 
 
           default:
