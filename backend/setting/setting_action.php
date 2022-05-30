@@ -108,7 +108,7 @@ if (isset($_POST["action"])) {
                             addBy 
                         )
                         VALUES
-                            ( '" . $staffID . "', '" . $siteID . "', '" . $staffNameTH . "', '" . $staffPosition . "', '" . $staffSection . "', '" . $staffProfitCenter . "', '" . $staffGroup . "', '" . $staffStatus . "', '" . $staffStartWorkDate . "', '" . $staffEndWorkDate . "','" . strtoupper(md5($staffID)) . "','N', '" . $staffLevel . "', '" . date("Y-m-d") . "', 'Test' )";
+                            ( '" . $staffID . "', '" . $siteID . "', '" . $staffNameTH . "', '" . $staffPosition . "', '" . $staffSection . "', '" . $staffProfitCenter . "', '" . $staffGroup . "', '" . $staffStatus . "', '" . $staffStartWorkDate . "', '" . $staffEndWorkDate . "','" . strtoupper(md5($staffID)) . "','N', '" . $staffLevel . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "' )";
 
                         $query_staff = $conn->query($sql);
 
@@ -127,10 +127,65 @@ if (isset($_POST["action"])) {
         }
     }
 
-    if ($_POST["action"] == "fetch_edit_timestamp") {
-        if (isset($_POST["id_timestamp_edit"])) {
-            $stmt = "SELECT timestampID,tbtimestamp.staffID,timestampLate,timestampAbsence,staffNameTH
-             FROM tbtimestamp LEFT OUTER JOIN tbstaff ON tbstaff.staffID = tbtimestamp.staffID WHERE timestampID = '" . $_POST["id_timestamp_edit"] . "' ";
+    if ($_POST["action"] == "add_staff") {
+        $sql = "INSERT INTO tbstaff (
+            staffID,
+            siteID,
+            staffNameTH,
+            staffPosition,
+            staffSection,
+            staffProfitCenter,
+            staffGroup,
+            staffStatus,
+            staffStartWorkDate,
+            staffPassword,
+            staffPasswordStatus,
+            staffLevel,
+            addDate,
+            addBy 
+        )
+        VALUES
+            ('" . $_POST["txt_staffID"] . "', 
+            '" . $_POST["list_staffSiteID"] . "', 
+            '" . $_POST["txt_staffFisrtName"] . " " . $_POST["txt_staffLastname"] . "', 
+            '" . $_POST["txt_staffPosition"] . "', 
+            '" . $_POST["txt_staffSection"] . "', 
+            '" . $_POST["txt_staffProfitcenter"] . "', 
+            '" . $_POST["txt_staffGroup"] . "', 
+            'Y', 
+            '" . $_POST["txt_staffStartwork"] . "', 
+            '" . strtoupper(md5($_POST["txt_staffID"])) . "',
+            'N', 
+            '" . $_POST["list_staffLevel"] . "', 
+            '" . date("Y-m-d") . "', 
+            '" . $_SESSION['staffNameTH'] . "' )";
+
+
+        //$_SESSION["staffName"]
+
+        $query = $conn->query($sql);
+
+        if ($query) {
+            echo 'บันทึกข้อมูล สำเร็จ ';
+        } else {
+            echo 'บันทึกข้อมูล ไม่สำเร็จ!!';
+        }
+    }
+
+    if ($_POST["action"] == "fetch_edit_staff") {
+        if (isset($_POST["id_staff_edit"])) {
+            $stmt = "SELECT staffID,
+            siteID,
+            staffNameTH,
+            staffPosition,
+            staffSection,
+            staffProfitCenter,
+            staffGroup,
+            staffStartWorkDate,
+            staffEndWorkDate,
+            staffLevel
+            
+             FROM tbstaff  WHERE staffID = '" . $_POST["id_staff_edit"] . "' ";
 
             $query = $conn->query($stmt);
             $result = $query->fetch_array(MYSQLI_ASSOC);
@@ -140,17 +195,24 @@ if (isset($_POST["action"])) {
         }
     }
 
-    if ($_POST["action"] == "edit_timestamp") {
+    if ($_POST["action"] == "edit_staff") {
 
         $stmt = " 
-		UPDATE tbtimestamp
+		UPDATE tbstaff
 		SET  
-		timestampLate = '" . $_POST['txt_timestampLate_e'] . "',
-		timestampAbsence = '" . $_POST['txt_timestampAbsence_e'] . "',
+		siteID = '" . $_POST['list_staffSiteID_e'] . "',
+		staffNameTH = '" . $_POST['txt_staffNameTH_e'] . "',
+        staffPosition = '" . $_POST['txt_staffPosition_e'] . "',
+        staffSection = '" . $_POST['txt_staffSection_e'] . "',
+        staffProfitCenter = '" . $_POST['txt_staffProfitcenter_e'] . "',
+        staffGroup = '" . $_POST['txt_staffGroup_e'] . "',
+        staffStartWorkDate = '" . $_POST['txt_staffStartwork_e'] . "',
+        staffEndWorkDate = '" . $_POST['txt_staffEndwork_e'] . "',
+        staffLevel = '" . $_POST['list_staffLevel_e'] . "',
 		editDate = '" . date("Y-m-d") . "',
-		editBy = 'test'
+		editBy = '" . $_SESSION['staffNameTH'] . "'
 	
-		WHERE timestampID = '" . $_POST['txt_timestampID_e'] . "' ";
+		WHERE staffID = '" . $_POST['txt_staffID_e'] . "' ";
 
         //$_SESSION["staffName"]
 

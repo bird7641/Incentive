@@ -1,19 +1,3 @@
-<!--
-
-=========================================================
-* Now UI Dashboard - v1.5.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard
-* Copyright 2019 Creative Tim (http://www.creative-tim.com)
-
-* Designed by www.invisionapp.com Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +24,9 @@
   <script src="../assets/jquery/jquery.min.js"></script>
   <script src="../assets/jquery/jquery-ui.js"></script>
 
-
+  <?php
+  include "../backend/dblink.php";
+  ?>
 </head>
 
 <body class="">
@@ -72,11 +58,38 @@
             </a>
           </li>
           <li>
+            <a href="main.php?page=complaint">
+              <i class="now-ui-icons files_paper"></i>
+              <p>Complaint</p>
+            </a>
+          </li>
+          <li>
+          <li>
+            <a href="main.php?page=commu">
+              <i class="now-ui-icons location_world"></i>
+              <p>Commu</p>
+            </a>
+          </li>
+          <li>
+          <li>
+            <a href="main.php?page=warning">
+              <i class="now-ui-icons ui-1_bell-53"></i>
+              <p>Warning</p>
+            </a>
+          </li>
+          <li>
             <a href="main.php?page=setting">
               <i class="now-ui-icons loader_gear"></i>
               <p>Setting</p>
             </a>
           </li>
+          <li>
+            <a href="../backend/index/logout.php">
+              <i class="now-ui-icons media-1_button-power"></i>
+              <p>Logout</p>
+            </a>
+          </li>
+
 
         </ul>
       </div>
@@ -97,12 +110,8 @@
 
 
               <li class="nav-item">
-
-                <a class="nav-link" href="#pablo" style="color: #000000;">
-                  <img src="img/icon/user_icon.PNG" alt="user" class="rounded-circle" width="40" height="40">
-                  <span>User Test Test</span>
-                </a>
-
+                <!--  <img src="img/icon/user_icon.PNG" alt="user" class="rounded-circle" width="40" height="40"> -->
+                <span style="color:#000000;font-size: 14px;"><?php echo $_SESSION['staffNameTH'] . " (" . $_SESSION['staffLevel'] . ")" ?></span>
               </li>
             </ul>
           </div>
@@ -126,6 +135,18 @@
 
           case "timestamp":
             include("menu_timestamp/timestamp.php");
+            break;
+
+          case "complaint":
+            include("menu_complaint/complaint.php");
+            break;
+
+          case "commu":
+            include("menu_commu/commu.php");
+            break;
+
+          case "warning":
+            include("menu_warning/warning.php");
             break;
 
           case "setting":

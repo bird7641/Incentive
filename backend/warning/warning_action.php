@@ -25,9 +25,9 @@ use PhpOffice\PhpSpreadsheet\Reader\Xls;
 
 
 if (isset($_POST["action"])) {
-    if ($_POST["action"] == "upload_file_timestamp") {
+    if ($_POST["action"] == "upload_file_warning") {
 
-        $inputFileName = $_FILES['file_timestamp']['tmp_name'];
+        $inputFileName = $_FILES['file_warning']['tmp_name'];
 
         $arr_file = explode('.', $inputFileName);
         $extension = end($arr_file);
@@ -49,22 +49,29 @@ if (isset($_POST["action"])) {
         if (!empty($sheetData)) {
 
             $staffID_head = $sheetData[0][0];
-            $timestampLate_head = $sheetData[0][1];
-            $timestampAbsence_head = $sheetData[0][2];
-            $timestampDate_head = $sheetData[0][3];
+            $warnDetail_head = $sheetData[0][1];
+            $warn1_head = $sheetData[0][2];
+            $warn2_head = $sheetData[0][3];
+            $warn3_head = $sheetData[0][4];
+            $warn4_head = $sheetData[0][5];
+            $warnDate_head = $sheetData[0][6];
 
-            if ($staffID_head == 'staffID' && $timestampLate_head == 'timestampLate' && $timestampAbsence_head == 'timestampAbsence' && $timestampDate_head == 'timestampDate') {
+
+            if ($staffID_head == 'staffID' && $warnDetail_head == 'warnDetail' && $warn1_head == 'warn1' && $warn2_head == 'warn2' && $warn3_head == 'warn3' && $warn4_head == 'warn4' && $warnDate_head == 'warnDate') {
                 for ($i = 1; $i < count($sheetData); $i++) {
 
                     $staffID = $sheetData[$i][0];
-                    $timestampLate = $sheetData[$i][1];
-                    $timestampAbsence = $sheetData[$i][2];
-                    $timestampDate = $sheetData[$i][3];
+                    $warnDetail = $sheetData[$i][1];
+                    $warn1 = $sheetData[$i][2];
+                    $warn2 = $sheetData[$i][3];
+                    $warn3 = $sheetData[$i][4];
+                    $warn4 = $sheetData[$i][5];
+                    $warnDate = $sheetData[$i][6];
 
 
-                    $month = date("m", strtotime($timestampDate));
-                    $year = date("Y", strtotime($timestampDate));
-                    $sql_check = "SELECT COUNT(staffID) AS countID FROM tbtimestamp WHERE staffID = '" . $staffID . "' AND ( MONTH(timestampDate) = '" . $month . "' AND YEAR(timestampDate) = '" . $year . "' )";
+                    $month = date("m", strtotime($warnDate));
+                    $year = date("Y", strtotime($warnDate));
+                    $sql_check = "SELECT COUNT(staffID) AS countID FROM tbwarning WHERE staffID = '" . $staffID . "' AND ( MONTH(warnDate) = '" . $month . "' AND YEAR(warnDate) = '" . $year . "' )";
                     $query_check = $conn->query($sql_check);
                     $result_check = $query_check->fetch_array(MYSQLI_ASSOC);
 
@@ -74,12 +81,16 @@ if (isset($_POST["action"])) {
                         echo "รหัสพนักงาน : " . $staffID . " | เดือน : " . $month . " | ปี : " . $year . " มีอยู่ในระบบแล้ว \n";
                     } else {
 
-                        $sql = "INSERT INTO tbtimestamp(staffID,timestampLate,
-                        timestampAbsence,
-                        timestampDate,
+                        $sql = "INSERT INTO tbwarning(staffID,
+                        warnDetail,
+                        warn1,
+                        warn2,
+                        warn3,
+                        warn4,
+                        warnDate,
                         addDate,
                         addBy
-                        ) VALUES('" . $staffID . "', '" . $timestampLate . "', '" . $timestampAbsence . "', '" . $timestampDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
+                        ) VALUES('" . $staffID . "', '" . $warnDetail . "', '" . $warn1 . "', '" . $warn2 . "', '" . $warn3 . "', '" . $warn4 . "','" . $warnDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
 
                         $query_timestamp = $conn->query($sql);
 
@@ -92,16 +103,15 @@ if (isset($_POST["action"])) {
                             $sql_emp = "
                             UPDATE tbemp 
                             SET 
-                            Late_Actual = '" . $timestampLate . "', 
-                            Absence_Actual = '" . $timestampAbsence . "' , 
-                            empDate = '" . $timestampDate . "',
+                            Warning = '1', 
+                            empDate = '" . $warnDate . "',
                             editDate = '" . date("Y-m-d") . "',
 				            editBy = '" . $_SESSION['staffNameTH'] . "' ";
                             //$_SESSION["staffNameTH"]
                         } else {
 
-                            $sql_emp = "INSERT INTO tbemp(staffID,Late_Target,Late_Actual,Absence_Target, Absence_Actual,empDate,addDate,addBy) 
-                            VALUES('" . $staffID . "','0', '" . $timestampLate . "','0', '" . $timestampAbsence . "', '" . $timestampDate . "', '" . date("Y-m-d") . "', 'test')";
+                            $sql_emp = "INSERT INTO tbemp(staffID,Warning,empDate,addDate,addBy) 
+                            VALUES('" . $staffID . "','1', '" . $warnDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
                         }
 
                         $query_emp = $conn->query($sql_emp);
@@ -121,10 +131,18 @@ if (isset($_POST["action"])) {
         }
     }
 
-    if ($_POST["action"] == "fetch_edit_timestamp") {
-        if (isset($_POST["id_timestamp_edit"])) {
-            $stmt = "SELECT timestampID,tbtimestamp.staffID,timestampLate,timestampAbsence,staffNameTH
-             FROM tbtimestamp LEFT OUTER JOIN tbstaff ON tbstaff.staffID = tbtimestamp.staffID WHERE timestampID = '" . $_POST["id_timestamp_edit"] . "' ";
+    if ($_POST["action"] == "fetch_edit_warning") {
+        if (isset($_POST["id_warning_edit"])) {
+            $stmt = "SELECT warnID,
+            tbwarning.staffID,
+            warnDetail,
+            warn1,
+            warn2,
+            warn3,
+            warn4,
+            warnDate,
+            staffNameTH
+             FROM tbwarning LEFT OUTER JOIN tbstaff ON tbstaff.staffID = tbwarning.staffID WHERE warnID = '" . $_POST["id_warning_edit"] . "' ";
 
             $query = $conn->query($stmt);
             $result = $query->fetch_array(MYSQLI_ASSOC);
@@ -134,17 +152,20 @@ if (isset($_POST["action"])) {
         }
     }
 
-    if ($_POST["action"] == "edit_timestamp") {
+    if ($_POST["action"] == "edit_warning") {
 
         $stmt = " 
-		UPDATE tbtimestamp
+		UPDATE tbwarning
 		SET  
-		timestampLate = '" . $_POST['txt_timestampLate_e'] . "',
-		timestampAbsence = '" . $_POST['txt_timestampAbsence_e'] . "',
+		warnDetail = '" . $_POST['txt_warnDetail_e'] . "',
+		warn1 = '" . $_POST['txt_warn1_e'] . "',
+        warn2 = '" . $_POST['txt_warn2_e'] . "',
+        warn3 = '" . $_POST['txt_warn3_e'] . "',
+        warn4 = '" . $_POST['txt_warn4_e'] . "',
 		editDate = '" . date("Y-m-d") . "',
 		editBy = '" . $_SESSION['staffNameTH'] . "'
 	
-		WHERE timestampID = '" . $_POST['txt_timestampID_e'] . "' ";
+		WHERE warnID = '" . $_POST['txt_warnID_e'] . "' ";
 
         //$_SESSION["staffName"]
 
@@ -158,9 +179,9 @@ if (isset($_POST["action"])) {
     }
 
 
-    if ($_POST["action"] == "del_timestamp") {
-        if (isset($_POST["id_timestamp_del"])) {
-            $stmt = "DELETE FROM tbtimestamp WHERE timestampID = '" . $_POST["id_timestamp_del"] . "'";
+    if ($_POST["action"] == "del_warning") {
+        if (isset($_POST["id_warning_del"])) {
+            $stmt = "DELETE FROM tbwarning WHERE warnID = '" . $_POST["id_warning_del"] . "'";
             $query = $conn->query($stmt);
 
             if ($query) {
