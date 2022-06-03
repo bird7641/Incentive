@@ -239,4 +239,19 @@ if (isset($_POST["action"])) {
             }
         }
     }
+
+    //site
+    if ($_POST["action"] == "del_site") {
+        if (isset($_POST["id_site_del"])) {
+            $stmt = "UPDATE tbsite
+            SET   siteStatus = 'InActive' WHERE siteID = '" . $_POST["id_site_del"] . "'";
+            $query = $conn->query($stmt);
+
+            if ($query) {
+                echo 'ลบข้อมูลเรียบร้อย';
+            } else {
+                echo 'ไม่สามารถลบข้อมูลได้';
+            }
+        }
+    }
 }

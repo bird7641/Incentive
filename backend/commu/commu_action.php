@@ -25,9 +25,9 @@ use PhpOffice\PhpSpreadsheet\Reader\Xls;
 
 
 if (isset($_POST["action"])) {
-    if ($_POST["action"] == "upload_file_timestamp") {
+    if ($_POST["action"] == "upload_file_commu") {
 
-        $inputFileName = $_FILES['file_timestamp']['tmp_name'];
+        $inputFileName = $_FILES['file_commu']['tmp_name'];
 
         $arr_file = explode('.', $inputFileName);
         $extension = end($arr_file);
@@ -49,22 +49,22 @@ if (isset($_POST["action"])) {
         if (!empty($sheetData)) {
 
             $staffID_head = $sheetData[0][0];
-            $timestampLate_head = $sheetData[0][1];
-            $timestampAbsence_head = $sheetData[0][2];
-            $timestampDate_head = $sheetData[0][3];
+            $commuActual_head = $sheetData[0][1];
+            $commuDate_head = $sheetData[0][2];
 
-            if ($staffID_head == 'staffID' && $timestampLate_head == 'timestampLate' && $timestampAbsence_head == 'timestampAbsence' && $timestampDate_head == 'timestampDate') {
+
+            if ($staffID_head == 'staffID' && $commuActual_head == 'commuActual' && $commuDate_head == 'commuDate') {
                 for ($i = 1; $i < count($sheetData); $i++) {
 
                     $staffID = $sheetData[$i][0];
-                    $timestampLate = $sheetData[$i][1];
-                    $timestampAbsence = $sheetData[$i][2];
-                    $timestampDate = $sheetData[$i][3];
+                    $commuActual = $sheetData[$i][1];
+                    $commuDate = $sheetData[$i][2];
 
 
-                    $month = date("m", strtotime($timestampDate));
-                    $year = date("Y", strtotime($timestampDate));
-                    $sql_check = "SELECT COUNT(staffID) AS countID FROM tbtimestamp WHERE staffID = '" . $staffID . "' AND ( MONTH(timestampDate) = '" . $month . "' AND YEAR(timestampDate) = '" . $year . "' )";
+
+                    $month = date("m", strtotime($commuDate));
+                    $year = date("Y", strtotime($commuDate));
+                    $sql_check = "SELECT COUNT(staffID) AS countID FROM tbcommu WHERE staffID = '" . $staffID . "' AND ( MONTH(commuDate) = '" . $month . "' AND YEAR(commuDate) = '" . $year . "' )";
                     $query_check = $conn->query($sql_check);
                     $result_check = $query_check->fetch_array(MYSQLI_ASSOC);
 
@@ -74,14 +74,13 @@ if (isset($_POST["action"])) {
                         echo "รหัสพนักงาน : " . $staffID . " | เดือน : " . $month . " | ปี : " . $year . " มีอยู่ในระบบแล้ว \n";
                     } else {
 
-                        $sql = "INSERT INTO tbtimestamp(staffID,timestampLate,
-                        timestampAbsence,
-                        timestampDate,
+                        $sql = "INSERT INTO tbcommu(staffID,commuActual,
+                        commuDate,
                         addDate,
                         addBy
-                        ) VALUES('" . $staffID . "', '" . $timestampLate . "', '" . $timestampAbsence . "', '" . $timestampDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
+                        ) VALUES('" . $staffID . "', '" . $commuActual . "', '" . $commuDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
 
-                        $query_timestamp = $conn->query($sql);
+                        $query_commu = $conn->query($sql);
 
                      /*    $sql_check_emp = "SELECT COUNT(staffID) AS countemp FROM tbemp WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
                         $query_check_emp = $conn->query($sql_check_emp);
@@ -92,22 +91,22 @@ if (isset($_POST["action"])) {
                             $sql_emp = "
                             UPDATE tbemp 
                             SET 
-                            Late_Actual = '" . $timestampLate . "', 
-                            Absence_Actual = '" . $timestampAbsence . "' , 
-                            empDate = '" . $timestampDate . "',
+                            CUMMU_Target = '4', 
+                            CUMMU_Actual = '" . $commuActual . "', 
+                            empDate = '" . $commuDate . "',
                             editDate = '" . date("Y-m-d") . "',
-				            editBy = '" . $_SESSION['staffNameTH'] . "' 
+				            editBy = '" . $_SESSION['staffNameTH'] . "'
                             WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
                             //$_SESSION["staffNameTH"]
                         } else {
 
-                            $sql_emp = "INSERT INTO tbemp(staffID,Late_Target,Late_Actual,Absence_Target, Absence_Actual,empDate,addDate,addBy) 
-                            VALUES('" . $staffID . "','0', '" . $timestampLate . "','0', '" . $timestampAbsence . "', '" . $timestampDate . "', '" . date("Y-m-d") . "', 'test')";
+                            $sql_emp = "INSERT INTO tbemp(staffID,CUMMU_Target,CUMMU_Actual,empDate,addDate,addBy) 
+                            VALUES('" . $staffID . "','4', '" . $commuActual . "', '" . $commuDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
                         }
 
                         $query_emp = $conn->query($sql_emp); */
 
-                        if ($query_timestamp ) {
+                        if ($query_commu ) {
                         } else {
                             echo "Error";
                         }
@@ -122,10 +121,10 @@ if (isset($_POST["action"])) {
         }
     }
 
-    if ($_POST["action"] == "fetch_edit_timestamp") {
-        if (isset($_POST["id_timestamp_edit"])) {
-            $stmt = "SELECT timestampID,tbtimestamp.staffID,timestampLate,timestampAbsence,staffNameTH
-             FROM tbtimestamp LEFT OUTER JOIN tbstaff ON tbstaff.staffID = tbtimestamp.staffID WHERE timestampID = '" . $_POST["id_timestamp_edit"] . "' ";
+    if ($_POST["action"] == "fetch_edit_commu") {
+        if (isset($_POST["id_commu_edit"])) {
+            $stmt = "SELECT commuID,tbcommu.staffID,commuActual,staffNameTH
+             FROM tbcommu LEFT OUTER JOIN tbstaff ON tbstaff.staffID = tbcommu.staffID WHERE commuID = '" . $_POST["id_commu_edit"] . "' ";
 
             $query = $conn->query($stmt);
             $result = $query->fetch_array(MYSQLI_ASSOC);
@@ -135,17 +134,16 @@ if (isset($_POST["action"])) {
         }
     }
 
-    if ($_POST["action"] == "edit_timestamp") {
+    if ($_POST["action"] == "edit_commu") {
 
         $stmt = " 
-		UPDATE tbtimestamp
+		UPDATE tbcommu
 		SET  
-		timestampLate = '" . $_POST['txt_timestampLate_e'] . "',
-		timestampAbsence = '" . $_POST['txt_timestampAbsence_e'] . "',
+		commuActual = '" . $_POST['txt_commuActual_e'] . "',
 		editDate = '" . date("Y-m-d") . "',
 		editBy = '" . $_SESSION['staffNameTH'] . "'
 	
-		WHERE timestampID = '" . $_POST['txt_timestampID_e'] . "' ";
+		WHERE commuID = '" . $_POST['txt_commuID_e'] . "' ";
 
         //$_SESSION["staffName"]
 
@@ -159,29 +157,30 @@ if (isset($_POST["action"])) {
     }
 
 
-    if ($_POST["action"] == "del_timestamp") {
-        if (isset($_POST["id_timestamp_del"])) {
-
-         /*    $stmt_emp = "SELECT * FROM tbtimestamp WHERE timestampID = '" . $_POST["id_timestamp_del"] . "' ";
+    if ($_POST["action"] == "del_commu") {
+        if (isset($_POST["id_commu_del"])) {
+           /*  $stmt_emp = "SELECT * FROM tbcommu WHERE commuID = '" . $_POST["id_commu_del"] . "' ";
             $query_emp = $conn->query($stmt_emp);
             $result_emp = $query_emp->fetch_array(MYSQLI_ASSOC);
-            $timestamp_date = $result_emp["timestampDate"];
-            $month = date("m", strtotime($timestamp_date));
-            $year = date("Y", strtotime($timestamp_date));
+            $commu_date = $result_emp["commuDate"];
+            $month = date("m", strtotime($commu_date));
+            $year = date("Y", strtotime($commu_date));
 
             $stmt_update_emp = " 
             UPDATE tbemp
             SET  
-            Late_Actual = null ,
-            Absence_Actual = null ,
+            CUMMU_Actual = null ,
             editDate = '" . date("Y-m-d") . "',
             editBy = '" . $_SESSION['staffNameTH'] . "'
         
             WHERE staffID = '" . $result_emp["staffID"] . "'  AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
 
+            //$_SESSION["staffName"]
+
             $query_update_emp = $conn->query($stmt_update_emp); */
 
-            $stmt = "DELETE FROM tbtimestamp WHERE timestampID = '" . $_POST["id_timestamp_del"] . "'";
+
+            $stmt = "DELETE FROM tbcommu WHERE commuID = '" . $_POST["id_commu_del"] . "'";
             $query = $conn->query($stmt);
 
             if ($query) {

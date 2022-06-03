@@ -71,14 +71,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txt_commuLate_e">commu Late</label>
-                            <input type="number" class="form-control" id="txt_commuLate_e" name="txt_commuLate_e">
+                            <label for="txt_commuLate_e">Commu Actual</label>
+                            <input type="number" class="form-control" id="txt_commuActual_e" name="txt_commuActual_e">
                         </div>
 
-                        <div class="form-group">
-                            <label for="txt_commuAbsence_e">commu Absence</label>
-                            <input type="number" class="form-control" id="txt_commuAbsence_e" name="txt_commuAbsence_e">
-                        </div>
+                     
 
 
                     </div>
@@ -103,19 +100,19 @@
           var hidden_list_TP_search = $('#hidden_list_TP_search').val(); */
         // var query2 = $('#hidden_country').val();
         $.ajax({
-            url: "../backend/timestamp/timestamp_fetch.php",
+            url: "../backend/commu/commu_fetch.php",
             method: "POST",
             data: {
                 query: query
             },
             beforeSend: function() {
                 $("#loading_image_table").show();
-                $('#table_timestamp').hide();
+                $('#table_commu').hide();
             },
             success: function(data) {
-                $('#table_timestamp').html(data);
+                $('#table_commu').html(data);
                 $("#loading_image_table").hide();
-                $('#table_timestamp').show();
+                $('#table_commu').show();
             }
 
         });
@@ -124,20 +121,16 @@
         load_data();
     }, 1000);
 
-
-
-
-
-    $('#frm_upload_file_timestamp').on('submit', function(event) {
+    $('#frm_upload_file_commu').on('submit', function(event) {
         event.preventDefault();
-        if ($('#file_timestamp').val() == '') {
+        if ($('#file_commu').val() == '') {
             alert("กรุณาเพิ่มไฟล์");
         } else {
-            $('#btn_upload_file_timestamp').attr('disabled', true);
+            $('#btn_upload_file_commu').attr('disabled', true);
 
             var form_data = $(this).serialize();
             $.ajax({
-                url: "../backend/timestamp/timestamp_action.php",
+                url: "../backend/commu/commu_action.php",
                 method: "POST",
                 data: new FormData(this),
                 contentType: false,
@@ -145,17 +138,17 @@
                 processData: false,
                 beforeSend: function() {
                     $("#loading_image").show();
-                    $("#text_btn_upload_file_timestamp").hide();
+                    $("#text_btn_upload_file_commu").hide();
                 },
                 success: function(data) {
                     $("#loading_image").hide();
-                    $("#text_btn_upload_file_timestamp").show();
+                    $("#text_btn_upload_file_commu").show();
 
-                    $('#modal_add_timestamp').modal('hide');
+                    $('#modal_add_commu').modal('hide');
                     alert(data);
-                    $('#frm_upload_file_timestamp')[0].reset();
+                    $('#frm_upload_file_commu')[0].reset();
 
-                    $('#btn_upload_file_timestamp').attr('disabled', false);
+                    $('#btn_upload_file_commu').attr('disabled', false);
                     load_data();
 
 
@@ -164,63 +157,60 @@
         }
     });
 
-    //Edit Timestamp
-    $(document).on('click', '.edit_timestamp', function() {
+    //Edit commu
+    $(document).on('click', '.edit_commu', function() {
 
-        var id_timestamp_edit = $(this).attr('id_timestamp_edit');
-        var action = 'fetch_edit_timestamp';
+        var id_commu_edit = $(this).attr('id_commu_edit');
+        var action = 'fetch_edit_commu';
         $.ajax({
-            url: "../backend/timestamp/timestamp_action.php",
+            url: "../backend/commu/commu_action.php",
             method: "POST",
             data: {
-                id_timestamp_edit: id_timestamp_edit,
+                id_commu_edit: id_commu_edit,
                 action: action
             },
             dataType: "json",
             success: function(data) {
-                $("#txt_timestampID_e").val(data.timestampID);
+                $("#txt_commuID_e").val(data.commuID);
                 $("#txt_staffID_e").val(data.staffID);
                 $("#txt_staffNameTH_e").val(data.staffNameTH);
-                $("#txt_timestampLate_e").val(data.timestampLate);
-                $("#txt_timestampAbsence_e").val(data.timestampAbsence);
+                $("#txt_commuActual_e").val(data.commuActual);
             }
         });
     });
 
 
-    $('#frm_edit_file_timestamp').on('submit', function(event) {
+    $('#frm_edit_file_commu').on('submit', function(event) {
         event.preventDefault();
 
-        if ($('#txt_timestampID_e').val() == '') {
+        if ($('#txt_commuID_e').val() == '') {
             alert("กรุณาติดต่อผู้พัฒนาระบบ");
-        } else if ($('#txt_timestampLate_e').val() == '') {
-            alert("กรุณาใส่จำนวน Timestamp Late");
-        } else if ($('#txt_timestampAbsence_e').val() == '') {
-            alert("กรุณาใส่จำนวน Timestamp Absence");
-        } else {
+        } else if ($('#txt_commuActual_e').val() == '') {
+            alert("กรุณาใส่จำนวน Commu Actual");
+        }  else {
 
-            $('#btn_edit_file_timestamp').attr('disabled', true);
+            $('#btn_edit_file_commu').attr('disabled', true);
 
 
             $.ajax({
-                url: "../backend/timestamp/timestamp_action.php",
+                url: "../backend/commu/commu_action.php",
                 method: "POST",
                 data: new FormData(this),
                 contentType: false,
                 cache: false,
                 processData: false,
                 beforeSend: function() {
-                    $("#loading_image_edit_timestamp").show();
-                    $("#text_btn_edit_timestamp").hide();
+                    $("#loading_image_edit_commu").show();
+                    $("#text_btn_edit_commu").hide();
                 },
                 success: function(data) {
-                    $("#loading_image_edit_timestamp").hide();
-                    $("#text_btn_edit_timestamp").show();
+                    $("#loading_image_edit_commu").hide();
+                    $("#text_btn_edit_commu").show();
 
-                    $('#modal_edit_timestamp').modal('hide');
+                    $('#modal_edit_commu').modal('hide');
                     alert(data);
 
-                    $('#btn_edit_file_timestamp').attr('disabled', false);
+                    $('#btn_edit_file_commu').attr('disabled', false);
 
                     load_data();
                     /*  var search_Partner = $('#search_Partner').val();
@@ -239,18 +229,18 @@
 
 
 
-    //Delete Timestamp
-    $(document).on('click', '.del_timestamp', function() {
-        var confirmation = confirm("คุณแน่ใจว่าจะลบ Timestamp นี้ใช่หรือไม่ ?");
+    //Delete commu
+    $(document).on('click', '.del_commu', function() {
+        var confirmation = confirm("คุณแน่ใจว่าจะลบ commu นี้ใช่หรือไม่ ?");
 
         if (confirmation) {
-            var id_timestamp_del = $(this).attr('id_timestamp_del');
-            var action = 'del_timestamp';
+            var id_commu_del = $(this).attr('id_commu_del');
+            var action = 'del_commu';
             $.ajax({
-                url: "../backend/timestamp/timestamp_action.php",
+                url: "../backend/commu/commu_action.php",
                 method: "POST",
                 data: {
-                    id_timestamp_del: id_timestamp_del,
+                    id_commu_del: id_commu_del,
                     action: action
                 },
                 success: function(data) {

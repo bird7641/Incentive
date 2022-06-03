@@ -94,7 +94,20 @@ if (isset($_POST["action"])) {
 
                         $query_timestamp = $conn->query($sql);
 
-                        $sql_check_emp = "SELECT COUNT(staffID) AS countemp FROM tbemp WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
+/* 
+                        if ($warn1 == 1) {
+                            $warn_emp = 1;
+                        } elseif ($warn2 == 1) {
+                            $warn_emp = 1;
+                        } elseif ($warn3 == 1) {
+                            $warn_emp = 1;
+                        } elseif ($warn4 == 1) {
+                            $warn_emp = 1;
+                        } else {
+                            $warn_emp = 0;
+                        } */
+
+                    /*     $sql_check_emp = "SELECT COUNT(staffID) AS countemp FROM tbemp WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
                         $query_check_emp = $conn->query($sql_check_emp);
                         $result_check_emp = $query_check_emp->fetch_array(MYSQLI_ASSOC);
 
@@ -103,20 +116,21 @@ if (isset($_POST["action"])) {
                             $sql_emp = "
                             UPDATE tbemp 
                             SET 
-                            Warning = '1', 
+                            Warning = '".$warn_emp."', 
                             empDate = '" . $warnDate . "',
                             editDate = '" . date("Y-m-d") . "',
-				            editBy = '" . $_SESSION['staffNameTH'] . "' ";
+				            editBy = '" . $_SESSION['staffNameTH'] . "' 
+                            WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "')";
                             //$_SESSION["staffNameTH"]
                         } else {
 
                             $sql_emp = "INSERT INTO tbemp(staffID,Warning,empDate,addDate,addBy) 
-                            VALUES('" . $staffID . "','1', '" . $warnDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
+                            VALUES('" . $staffID . "','".$warn_emp."', '" . $warnDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
                         }
 
-                        $query_emp = $conn->query($sql_emp);
+                        $query_emp = $conn->query($sql_emp); */
 
-                        if ($query_timestamp && $query_emp) {
+                        if ($query_timestamp ) {
                         } else {
                             echo "Error";
                         }

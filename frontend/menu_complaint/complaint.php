@@ -48,7 +48,7 @@
 
     <!-- Modal Edit complaint-->
     <div class="modal fade" id="modal_edit_complaint" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form name="frm_edit_file_complaint" id="frm_edit_file_complaint" method="post" enctype="multipart/form-data">
                     <div class="modal-header">
@@ -71,13 +71,17 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txt_complaintLate_e">complaint Late</label>
-                            <input type="number" class="form-control" id="txt_complaintLate_e" name="txt_complaintLate_e">
+                            <label for="txt_complaintType_e">Complaint Type</label>
+                            <input type="text" class="form-control" id="txt_complaintType_e" name="txt_complaintType_e">
                         </div>
 
                         <div class="form-group">
-                            <label for="txt_complaintAbsence_e">complaint Absence</label>
-                            <input type="number" class="form-control" id="txt_complaintAbsence_e" name="txt_complaintAbsence_e">
+                            <label for="txt_complaintDetail_e">Complaint Detail</label>
+                            <textarea type="text" class="form-control" id="txt_complaintDetail_e" name="txt_complaintDetail_e"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_complaintSource_e">Complaint Source</label>
+                            <input type="text" class="form-control" id="txt_complaintSource_e" name="txt_complaintSource_e">
                         </div>
 
 
@@ -103,19 +107,19 @@
           var hidden_list_TP_search = $('#hidden_list_TP_search').val(); */
         // var query2 = $('#hidden_country').val();
         $.ajax({
-            url: "../backend/timestamp/timestamp_fetch.php",
+            url: "../backend/complaint/complaint_fetch.php",
             method: "POST",
             data: {
                 query: query
             },
             beforeSend: function() {
                 $("#loading_image_table").show();
-                $('#table_timestamp').hide();
+                $('#table_complaint').hide();
             },
             success: function(data) {
-                $('#table_timestamp').html(data);
+                $('#table_complaint').html(data);
                 $("#loading_image_table").hide();
-                $('#table_timestamp').show();
+                $('#table_complaint').show();
             }
 
         });
@@ -128,16 +132,16 @@
 
 
 
-    $('#frm_upload_file_timestamp').on('submit', function(event) {
+    $('#frm_upload_file_complaint').on('submit', function(event) {
         event.preventDefault();
-        if ($('#file_timestamp').val() == '') {
+        if ($('#file_complaint').val() == '') {
             alert("กรุณาเพิ่มไฟล์");
         } else {
-            $('#btn_upload_file_timestamp').attr('disabled', true);
+            $('#btn_upload_file_complaint').attr('disabled', true);
 
             var form_data = $(this).serialize();
             $.ajax({
-                url: "../backend/timestamp/timestamp_action.php",
+                url: "../backend/complaint/complaint_action.php",
                 method: "POST",
                 data: new FormData(this),
                 contentType: false,
@@ -145,17 +149,17 @@
                 processData: false,
                 beforeSend: function() {
                     $("#loading_image").show();
-                    $("#text_btn_upload_file_timestamp").hide();
+                    $("#text_btn_upload_file_complaint").hide();
                 },
                 success: function(data) {
                     $("#loading_image").hide();
-                    $("#text_btn_upload_file_timestamp").show();
+                    $("#text_btn_upload_file_complaint").show();
 
-                    $('#modal_add_timestamp').modal('hide');
+                    $('#modal_add_complaint').modal('hide');
                     alert(data);
-                    $('#frm_upload_file_timestamp')[0].reset();
+                    $('#frm_upload_file_complaint')[0].reset();
 
-                    $('#btn_upload_file_timestamp').attr('disabled', false);
+                    $('#btn_upload_file_complaint').attr('disabled', false);
                     load_data();
 
 
@@ -164,63 +168,66 @@
         }
     });
 
-    //Edit Timestamp
-    $(document).on('click', '.edit_timestamp', function() {
+    //Edit complaint
+    $(document).on('click', '.edit_complaint', function() {
 
-        var id_timestamp_edit = $(this).attr('id_timestamp_edit');
-        var action = 'fetch_edit_timestamp';
+        var id_complaint_edit = $(this).attr('id_complaint_edit');
+        var action = 'fetch_edit_complaint';
         $.ajax({
-            url: "../backend/timestamp/timestamp_action.php",
+            url: "../backend/complaint/complaint_action.php",
             method: "POST",
             data: {
-                id_timestamp_edit: id_timestamp_edit,
+                id_complaint_edit: id_complaint_edit,
                 action: action
             },
             dataType: "json",
             success: function(data) {
-                $("#txt_timestampID_e").val(data.timestampID);
+                $("#txt_complaintID_e").val(data.complaintID);
                 $("#txt_staffID_e").val(data.staffID);
                 $("#txt_staffNameTH_e").val(data.staffNameTH);
-                $("#txt_timestampLate_e").val(data.timestampLate);
-                $("#txt_timestampAbsence_e").val(data.timestampAbsence);
+                $("#txt_complaintType_e").val(data.complaintType);
+                $("#txt_complaintDetail_e").val(data.complaintDetail);
+                $("#txt_complaintSource_e").val(data.complaintSource);
             }
         });
     });
 
 
-    $('#frm_edit_file_timestamp').on('submit', function(event) {
+    $('#frm_edit_file_complaint').on('submit', function(event) {
         event.preventDefault();
 
-        if ($('#txt_timestampID_e').val() == '') {
+        if ($('#txt_complaintID_e').val() == '') {
             alert("กรุณาติดต่อผู้พัฒนาระบบ");
-        } else if ($('#txt_timestampLate_e').val() == '') {
-            alert("กรุณาใส่จำนวน Timestamp Late");
-        } else if ($('#txt_timestampAbsence_e').val() == '') {
-            alert("กรุณาใส่จำนวน Timestamp Absence");
-        } else {
+        } else if ($('#txt_complaintType_e').val() == '') {
+            alert("กรุณาใส่ Complaint Type");
+        } else if ($('#txt_complaintDetail_e').val() == '') {
+            alert("กรุณาใส่ Complaint Detail ");
+        } else if ($('#txt_complaintSource_e').val() == '') {
+            alert("กรุณาใส่ Complaint Source");
+        }else {
 
-            $('#btn_edit_file_timestamp').attr('disabled', true);
+            $('#btn_edit_file_complaint').attr('disabled', true);
 
 
             $.ajax({
-                url: "../backend/timestamp/timestamp_action.php",
+                url: "../backend/complaint/complaint_action.php",
                 method: "POST",
                 data: new FormData(this),
                 contentType: false,
                 cache: false,
                 processData: false,
                 beforeSend: function() {
-                    $("#loading_image_edit_timestamp").show();
-                    $("#text_btn_edit_timestamp").hide();
+                    $("#loading_image_edit_complaint").show();
+                    $("#text_btn_edit_complaint").hide();
                 },
                 success: function(data) {
-                    $("#loading_image_edit_timestamp").hide();
-                    $("#text_btn_edit_timestamp").show();
+                    $("#loading_image_edit_complaint").hide();
+                    $("#text_btn_edit_complaint").show();
 
-                    $('#modal_edit_timestamp').modal('hide');
+                    $('#modal_edit_complaint').modal('hide');
                     alert(data);
 
-                    $('#btn_edit_file_timestamp').attr('disabled', false);
+                    $('#btn_edit_file_complaint').attr('disabled', false);
 
                     load_data();
                     /*  var search_Partner = $('#search_Partner').val();
@@ -239,18 +246,18 @@
 
 
 
-    //Delete Timestamp
-    $(document).on('click', '.del_timestamp', function() {
-        var confirmation = confirm("คุณแน่ใจว่าจะลบ Timestamp นี้ใช่หรือไม่ ?");
+    //Delete complaint
+    $(document).on('click', '.del_complaint', function() {
+        var confirmation = confirm("คุณแน่ใจว่าจะลบ complaint นี้ใช่หรือไม่ ?");
 
         if (confirmation) {
-            var id_timestamp_del = $(this).attr('id_timestamp_del');
-            var action = 'del_timestamp';
+            var id_complaint_del = $(this).attr('id_complaint_del');
+            var action = 'del_complaint';
             $.ajax({
-                url: "../backend/timestamp/timestamp_action.php",
+                url: "../backend/complaint/complaint_action.php",
                 method: "POST",
                 data: {
-                    id_timestamp_del: id_timestamp_del,
+                    id_complaint_del: id_complaint_del,
                     action: action
                 },
                 success: function(data) {

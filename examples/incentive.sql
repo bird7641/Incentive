@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : Mysql_Me
+ Source Server         : ME_mysql
  Source Server Type    : MySQL
  Source Server Version : 100411
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 03/06/2022 11:31:41
+ Date: 04/06/2022 00:50:47
 */
 
 SET NAMES utf8mb4;
@@ -31,27 +31,36 @@ CREATE TABLE `tbcommu`  (
   `editDate` date NULL DEFAULT NULL,
   `editBy` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`commuID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tbcommu
+-- ----------------------------
+INSERT INTO `tbcommu` VALUES (9, '1', 6, '2022-04-28', '2022-06-03', 'จิรานุวัฒน์ ตุณทกิจ', '2022-06-03', 'จิรานุวัฒน์ ตุณทกิจ');
 
 -- ----------------------------
 -- Table structure for tbcomplaint
 -- ----------------------------
 DROP TABLE IF EXISTS `tbcomplaint`;
 CREATE TABLE `tbcomplaint`  (
-  `complaintID` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `complaintID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `staffID` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `siteID` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `complaintGroup` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `complaintType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `complaintDetail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `complaintSource` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `complaintType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ประเภทเรื่อง',
+  `complaintDetail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'รายละเอียด',
+  `complaintSource` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'แหล่งที่มา',
   `complaintDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `addDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `addDate` date NULL DEFAULT NULL,
   `addBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `editDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `editDate` date NULL DEFAULT NULL,
   `editBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`complaintID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tbcomplaint
+-- ----------------------------
+INSERT INTO `tbcomplaint` VALUES (3, '1', 'test', 'test', 'test', '2022-06-03', '2022-06-04', 'จิรานุวัฒน์ ตุณทกิจ', '2022-06-04', 'จิรานุวัฒน์ ตุณทกิจ');
+INSERT INTO `tbcomplaint` VALUES (4, '1', 'ความสุภาพ-มารยาทในการให้บริการ', 'ร้องเรียนความสุภาพและมารยาทในการให้บริการของช่างประจำอาคาร ', 'SSM Call', '2022-06-10', '2022-06-04', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tbemp
@@ -80,8 +89,8 @@ CREATE TABLE `tbemp`  (
 -- ----------------------------
 -- Records of tbemp
 -- ----------------------------
-INSERT INTO `tbemp` VALUES (1, '1', NULL, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-05-29', 'test');
-INSERT INTO `tbemp` VALUES (2, '2', NULL, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-05-29', 'test');
+INSERT INTO `tbemp` VALUES (1, '1', 4, 2, 0, NULL, 0, NULL, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-06-03', 'จิรานุวัฒน์ ตุณทกิจ');
+INSERT INTO `tbemp` VALUES (2, '2', 4, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-06-03', 'จิรานุวัฒน์ ตุณทกิจ');
 INSERT INTO `tbemp` VALUES (3, '3', NULL, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-05-29', 'test');
 INSERT INTO `tbemp` VALUES (4, '4', NULL, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-05-29', 'test');
 INSERT INTO `tbemp` VALUES (5, '5', NULL, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-05-29', 'test');
@@ -181,7 +190,7 @@ CREATE TABLE `tbsite`  (
 -- ----------------------------
 -- Records of tbsite
 -- ----------------------------
-INSERT INTO `tbsite` VALUES ('1', 'โครงการวิภาวดี', 'tst', 'test', 100, 100, 'Y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tbsite` VALUES ('1', 'โครงการวิภาวดี', 'tst', 'test', 100, 100, 'Active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tbstaff
@@ -235,13 +244,11 @@ CREATE TABLE `tbtimestamp`  (
 -- ----------------------------
 -- Records of tbtimestamp
 -- ----------------------------
-INSERT INTO `tbtimestamp` VALUES (9, '1', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (10, '2', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
 INSERT INTO `tbtimestamp` VALUES (11, '3', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
 INSERT INTO `tbtimestamp` VALUES (12, '4', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
 INSERT INTO `tbtimestamp` VALUES (13, '5', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
 INSERT INTO `tbtimestamp` VALUES (14, '6', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (15, '7', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (15, '7', '2', '2', '2022-04-28', '2022-05-29', 'Test', '2022-06-04', 'จิรานุวัฒน์ ตุณทกิจ');
 INSERT INTO `tbtimestamp` VALUES (16, '8', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
 INSERT INTO `tbtimestamp` VALUES (17, '9', '1', '1', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
 INSERT INTO `tbtimestamp` VALUES (18, '10', '2', '2', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
