@@ -5,39 +5,39 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-11">
-                        <h4 class="card-title">Complaint</h4>
+                        <h4 class="card-title">Commu</h4>
                     </div>
                     <div class="col-md-1 float-right">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modal_add_complaint">Add</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modal_add_commu">Add</button>
 
                     </div>
                 </div>
             </div>
             <div class="card-body text-center">
                 <img id="loading_image_table" src="../frontend/img/icon/Spinner_loader.gif" style="display: none;" />
-                <div id="table_complaint"> </div>
+                <div id="table_commu"> </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal upload complaint-->
-    <div class="modal fade" id="modal_add_complaint" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Modal upload commu-->
+    <div class="modal fade" id="modal_add_commu" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form name="frm_upload_file_complaint" id="frm_upload_file_complaint" method="post" enctype="multipart/form-data">
+                <form name="frm_upload_file_commu" id="frm_upload_file_commu" method="post" enctype="multipart/form-data">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Upload Complaint</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Upload Commu</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label for="file_complaint">File Excel</label>
-                        <input type="file" class="form-control" id="file_complaint" name="file_complaint">
+                        <label for="file_commu">File Excel</label>
+                        <input type="file" class="form-control" id="file_commu" name="file_commu">
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" id="action" name="action" value="upload_file_complaint">
-                        <button type="submit" id="btn_upload_file_complaint" name="btn_upload_file_complaint" class="btn btn-success btn-round"><span id="text_btn_upload_file_complaint">Summit</span> <img id="loading_image" src="../frontend/img/icon/Spinner_loader.gif" style="display:none;" width="20" height="20" /></button>
+                        <input type="hidden" id="action" name="action" value="upload_file_commu">
+                        <button type="submit" id="btn_upload_file_commu" name="btn_upload_file_commu" class="btn btn-success btn-round"><span id="text_btn_upload_file_commu">Summit</span> <img id="loading_image" src="../frontend/img/icon/Spinner_loader.gif" style="display:none;" width="20" height="20" /></button>
                         <button type="button" class="btn btn-danger btn-round" data-dismiss="modal">Close</button>
 
                     </div>
@@ -46,13 +46,13 @@
         </div>
     </div>
 
-    <!-- Modal Edit complaint-->
-    <div class="modal fade" id="modal_edit_complaint" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Modal Edit commu-->
+    <div class="modal fade" id="modal_edit_commu" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form name="frm_edit_file_complaint" id="frm_edit_file_complaint" method="post" enctype="multipart/form-data">
+                <form name="frm_edit_file_commu" id="frm_edit_file_commu" method="post" enctype="multipart/form-data">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Complaint</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Commu</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -71,21 +71,21 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txt_complaintLate_e">complaint Late</label>
-                            <input type="number" class="form-control" id="txt_complaintLate_e" name="txt_complaintLate_e">
+                            <label for="txt_commuLate_e">commu Late</label>
+                            <input type="number" class="form-control" id="txt_commuLate_e" name="txt_commuLate_e">
                         </div>
 
                         <div class="form-group">
-                            <label for="txt_complaintAbsence_e">complaint Absence</label>
-                            <input type="number" class="form-control" id="txt_complaintAbsence_e" name="txt_complaintAbsence_e">
+                            <label for="txt_commuAbsence_e">commu Absence</label>
+                            <input type="number" class="form-control" id="txt_commuAbsence_e" name="txt_commuAbsence_e">
                         </div>
 
 
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" class="form-control" id="txt_complaintID_e" name="txt_complaintID_e">
-                        <input type="hidden" id="action" name="action" value="edit_complaint">
-                        <button type="submit" id="btn_edit_file_complaint" name="btn_edit_file_complaint" class="btn btn-success btn-round"><span id="text_btn_edit_complaint">Summit</span> <img id="loading_image_edit_complaint" src="../frontend/img/icon/Spinner_loader.gif" style="display:none;" width="20" height="20" /></button>
+                        <input type="hidden" class="form-control" id="txt_commuID_e" name="txt_commuID_e">
+                        <input type="hidden" id="action" name="action" value="edit_commu">
+                        <button type="submit" id="btn_edit_file_commu" name="btn_edit_file_commu" class="btn btn-success btn-round"><span id="text_btn_edit_commu">Summit</span> <img id="loading_image_edit_commu" src="../frontend/img/icon/Spinner_loader.gif" style="display:none;" width="20" height="20" /></button>
                         <button type="button" class="btn btn-danger btn-round" data-dismiss="modal">Close</button>
 
                     </div>
