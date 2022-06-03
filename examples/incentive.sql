@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : ME_mysql
+ Source Server         : Mysql_Me
  Source Server Type    : MySQL
  Source Server Version : 100411
  Source Host           : localhost:3306
@@ -11,11 +11,27 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 31/05/2022 16:57:15
+ Date: 03/06/2022 11:31:41
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for tbcommu
+-- ----------------------------
+DROP TABLE IF EXISTS `tbcommu`;
+CREATE TABLE `tbcommu`  (
+  `commuID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `staffID` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `commuActual` int(5) NULL DEFAULT NULL,
+  `commuDate` date NULL DEFAULT NULL,
+  `addDate` date NULL DEFAULT NULL,
+  `addBy` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `editDate` date NULL DEFAULT NULL,
+  `editBy` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`commuID`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tbcomplaint
@@ -133,6 +149,7 @@ INSERT INTO `tblog` VALUES ('0000-00-00', '18:03:33', 'จิรานุวั�
 INSERT INTO `tblog` VALUES ('2022-05-30', '18:11:18', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
 INSERT INTO `tblog` VALUES ('0000-00-00', '18:17:19', 'จิรานุวัฒน์ ตุณทกิจ', '127.0.0.1', 'Logout', 'ออกจากระบบด้วยตนเอง', '-');
 INSERT INTO `tblog` VALUES ('2022-05-30', '18:30:45', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('2022-06-01', '21:10:02', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
 
 -- ----------------------------
 -- Table structure for tbsite
