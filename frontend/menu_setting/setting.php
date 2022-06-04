@@ -302,7 +302,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Add site</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Site</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -333,20 +333,20 @@
                                     <div class="row">
                                         <div class="col-md-4 pr-1">
                                             <div class="form-group">
-                                                <label>รหัสพนัก</label>
-                                                <input type="text" class="form-control" id="txt_siteID" name="txt_siteID" placeholder="รหัสพนัก" value="">
+                                                <label>รหัสโครงการ</label>
+                                                <input type="text" class="form-control" id="txt_siteID" name="txt_siteID" placeholder="รหัสโครงการ" value="">
                                             </div>
                                         </div>
                                         <div class="col-md-4 px-1">
                                             <div class="form-group">
-                                                <label>Fisrtname</label>
-                                                <input type="text" class="form-control" id="txt_siteFisrtName" name="txt_siteFisrtName" placeholder="ชื่อ" value="">
+                                                <label>ชื่อโครงการ</label>
+                                                <input type="text" class="form-control" id="txt_siteName" name="txt_siteFisrtName" placeholder="ชื่อโครงการ" value="">
                                             </div>
                                         </div>
                                         <div class="col-md-4 pl-1">
                                             <div class="form-group">
-                                                <label>Lastname</label>
-                                                <input type="text" class="form-control" id="txt_siteLastname" name="txt_siteLastname" placeholder="นามสกุล" value="">
+                                                <label>Type</label>
+                                                <input type="text" class="form-control" id="txt_siteType" name="txt_siteType" placeholder="Type" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -354,46 +354,53 @@
                                     <div class="row">
                                         <div class="col-md-4 pr-1">
                                             <div class="form-group">
-                                                <label>Position</label>
-                                                <input type="text" class="form-control" id="txt_sitePosition" name="txt_sitePosition" placeholder="Position" value="">
+                                                <label>Developer</label>
+                                                <input type="text" class="form-control" id="txt_siteDeveloper" name="txt_siteDeveloper" placeholder="Developer" value="">
                                             </div>
                                         </div>
                                         <div class="col-md-4 px-1">
                                             <div class="form-group">
-                                                <label>Section</label>
-                                                <input type="text" class="form-control" id="txt_siteSection" name="txt_siteSection" placeholder="Section" value="">
+                                                <label>Unit</label>
+                                                <input type="text" class="form-control" id="txt_siteUnit" name="txt_siteUnit" placeholder="Unit" value="">
                                             </div>
                                         </div>
                                         <div class="col-md-4 pl-1">
                                             <div class="form-group">
-                                                <label>Profitcenter</label>
-                                                <input type="text" class="form-control" id="txt_siteProfitcenter" name="txt_siteProfitcenter" placeholder="Profitcenter" value="">
+                                                <label>Transfer</label>
+                                                <input type="text" class="form-control" id="txt_siteTransfer" name="txt_siteTransfer" placeholder="Transfer" value="">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
+
                                         <div class="col-md-4 pr-1">
                                             <div class="form-group">
-                                                <label>Group</label>
-                                                <input type="text" class="form-control" id="txt_siteGroup" name="txt_siteGroup" placeholder="Group" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 pr-1">
-                                            <div class="form-group">
-                                                <label>Startwork</label>
+                                                <label>Site Startwork</label>
                                                 <input type="date" class="form-control" id="txt_siteStartwork" name="txt_siteStartwork" value="<?php echo date("Y-m-d"); ?>">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 px-1">
+                                        <div class="col-md-4 pr-1">
                                             <div class="form-group">
-                                                <label for="list_siteLevel">Level</label>
-                                                <select id="list_siteLevel" name="list_siteLevel" class="form-control">
-                                                    <option value="" selected>Choose...</option>
-                                                    <option value="User">User</option>
-                                                    <option value="Admin">Admin</option>
-                                                    <option value="SuperAdmin">SuperAdmin</option>
-                                                </select>
+                                                <label>Site Endwork</label>
+                                                <input type="date" class="form-control" id="txt_siteEndwork" name="txt_siteEndwork" value="<?php echo date("Y-m-d"); ?>">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 pr-1">
+                                            <div class="form-group">
+                                                <label>Zone No</label>
+                                                <input type="text" class="form-control" id="txt_siteZoneNo" name="txt_siteZoneNo" placeholder="Zone No" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-1">
+                                            <div class="form-group">
+                                                <label>Zone Manager</label>
+                                                <input type="text" class="form-control" id="txt_siteZoneManager" name="txt_siteZoneManager" placeholder="Zone Manager" value="">
                                             </div>
                                         </div>
 
@@ -401,10 +408,14 @@
                                     <div class="row">
                                         <div class="col-md-6 pr-1">
                                             <div class="form-group">
-                                                <label for="list_siteSiteID">Site</label>
-                                                <select id="list_siteSiteID" name="list_siteSiteID" class="form-control">
-                                                    <option value="" selected>Choose...</option>
-                                                </select>
+                                                <label>Area Manager</label>
+                                                <input type="text" class="form-control" id="txt_siteAreaManager" name="txt_siteAreaManager" placeholder="Area Manager" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-1">
+                                            <div class="form-group">
+                                                <label>Join SMART World</label>
+                                                <input type="text" class="form-control" id="txt_siteJSW" name="txt_siteJSW" placeholder="Join SMART World" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -460,36 +471,20 @@
                     <div class="row">
                         <div class="col-md-4 pr-1">
                             <div class="form-group">
-                                <label>รหัสพนัก</label>
-                                <input type="text" class="form-control" id="txt_siteID_e" name="txt_siteID_e" placeholder="รหัสพนัก" value="" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-8 px-1">
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" id="txt_siteNameTH_e" name="txt_siteNameTH_e" placeholder="ชื่อ-นามสกุล" value="">
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4 pr-1">
-                            <div class="form-group">
-                                <label>Position</label>
-                                <input type="text" class="form-control" id="txt_sitePosition_e" name="txt_sitePosition_e" placeholder="Position" value="">
+                                <label>รหัสโครงการ</label>
+                                <input type="text" class="form-control" id="txt_siteID_e" name="txt_siteID_e" placeholder="รหัสโครงการ" value="" readonly>
                             </div>
                         </div>
                         <div class="col-md-4 px-1">
                             <div class="form-group">
-                                <label>Section</label>
-                                <input type="text" class="form-control" id="txt_siteSection_e" name="txt_siteSection_e" placeholder="Section" value="">
+                                <label>ชื่อโครงการ</label>
+                                <input type="text" class="form-control" id="txt_siteName_e" name="txt_siteFisrtName_e" placeholder="ชื่อโครงการ" value="">
                             </div>
                         </div>
                         <div class="col-md-4 pl-1">
                             <div class="form-group">
-                                <label>Profitcenter</label>
-                                <input type="text" class="form-control" id="txt_siteProfitcenter_e" name="txt_siteProfitcenter_e" placeholder="Profitcenter" value="">
+                                <label>Type</label>
+                                <input type="text" class="form-control" id="txt_siteType_e" name="txt_siteType_e" placeholder="Type" value="">
                             </div>
                         </div>
                     </div>
@@ -497,46 +492,74 @@
                     <div class="row">
                         <div class="col-md-4 pr-1">
                             <div class="form-group">
-                                <label>Group</label>
-                                <input type="text" class="form-control" id="txt_siteGroup_e" name="txt_siteGroup_e" placeholder="Group" value="">
+                                <label>Developer</label>
+                                <input type="text" class="form-control" id="txt_siteDeveloper_e" name="txt_siteDeveloper_e" placeholder="Developer" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>Unit</label>
+                                <input type="text" class="form-control" id="txt_siteUnit_e" name="txt_siteUnit_e" placeholder="Unit" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-1">
+                            <div class="form-group">
+                                <label>Transfer</label>
+                                <input type="text" class="form-control" id="txt_siteTransfer_e" name="txt_siteTransfer_e" placeholder="Transfer" value="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4 pr-1">
+                            <div class="form-group">
+                                <label>Site Startwork</label>
+                                <input type="date" class="form-control" id="txt_siteStartwork_e" name="txt_siteStartwork_e" value="<?php echo date("Y-m-d"); ?>">
                             </div>
                         </div>
                         <div class="col-md-4 pr-1">
                             <div class="form-group">
-                                <label>Startwork</label>
-                                <input type="date" class="form-control" id="txt_siteStartwork_e" name="txt_siteStartwork_e" value="">
-                            </div>
-                        </div>
-                        <div class="col-md-4 pr-1">
-                            <div class="form-group">
-                                <label>Endwork</label>
-                                <input type="date" class="form-control" id="txt_siteEndwork_e" name="txt_siteEndwork_e" value="">
+                                <label>Site Endwork</label>
+                                <input type="date" class="form-control" id="txt_siteEndwork_e" name="txt_siteEndwork_e" value="<?php echo date("Y-m-d"); ?>">
                             </div>
                         </div>
 
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 pr-1">
+                            <div class="form-group">
+                                <label>Zone No</label>
+                                <input type="text" class="form-control" id="txt_siteZoneNo_e" name="txt_siteZoneNo_e" placeholder="Zone No" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>Zone Manager</label>
+                                <input type="text" class="form-control" id="txt_siteZoneManager_e" name="txt_siteZoneManager_e" placeholder="Zone Manager" value="">
+                            </div>
+                        </div>
 
                     </div>
                     <div class="row">
                         <div class="col-md-6 pr-1">
                             <div class="form-group">
-                                <label for="list_siteLevel_e">Level</label>
-                                <select id="list_siteLevel_e" name="list_siteLevel_e" class="form-control">
-                                    <option value="" selected>Choose...</option>
-                                    <option value="User">User</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="SuperAdmin">SuperAdmin</option>
-                                </select>
+                                <label>Area Manager</label>
+                                <input type="text" class="form-control" id="txt_siteAreaManager_e" name="txt_siteAreaManager_e" placeholder="Area Manager" value="">
                             </div>
                         </div>
-                        <div class="col-md-6 pr-1">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
-                                <label for="list_siteSiteID_e">Site</label>
-                                <select id="list_siteSiteID_e" name="list_siteSiteID_e" class="form-control">
-                                    <option value="" selected>Choose...</option>
-                                </select>
+                                <label>Join SMART World</label>
+                                <input type="text" class="form-control" id="txt_siteJSW_e" name="txt_siteJSW_e" placeholder="Join SMART World" value="">
                             </div>
                         </div>
                     </div>
+
+
+
 
                 </div>
                 <div class="modal-footer">
@@ -613,7 +636,6 @@
             }
         });
     }
-
 
     setTimeout(function() {
         load_data_staff();
@@ -765,9 +787,6 @@
         }
 
     });
-    //staff
-
-
 
 
     $('#frm_edit_staff').on('submit', function(event) {
@@ -830,7 +849,7 @@
         }
 
     });
-
+    //staff
 
     //site
     function load_data_site(query = '') {
@@ -856,7 +875,7 @@
         });
     }
 
-    
+
 
     $('#frm_upload_file_site').on('submit', function(event) {
         event.preventDefault();
@@ -973,40 +992,8 @@
         });
     });
 
-    //Delete site
-    $(document).on('click', '.del_site', function() {
-        var confirmation = confirm("คุณแน่ใจว่าจะลบ siteID นี้ใช่หรือไม่ ?");
 
-        if (confirmation) {
-            var id_site_del = $(this).attr('id_site_del');
-            var action = 'del_site';
-            $.ajax({
-                url: "../backend/setting/setting_action.php",
-                method: "POST",
-                data: {
-                    id_site_del: id_site_del,
-                    action: action
-                },
-                success: function(data) {
-                    alert(data);
-                    load_data_site();
-                    /* var search_Partner = $('#search_Partner').val();
-                    if (search_Partner == '') {
-                        load_data();
-                    } else {
-                        load_data(search_Partner);
-                    } */
-
-                }
-            });
-        }
-
-    });
     //site
-
-
-
-
     $('#frm_edit_site').on('submit', function(event) {
         event.preventDefault();
 
@@ -1064,6 +1051,36 @@
                 }
             });
 
+        }
+
+    });
+
+    //Delete site
+    $(document).on('click', '.del_site', function() {
+        var confirmation = confirm("คุณแน่ใจว่าจะลบ siteID นี้ใช่หรือไม่ ?");
+
+        if (confirmation) {
+            var id_site_del = $(this).attr('id_site_del');
+            var action = 'del_site';
+            $.ajax({
+                url: "../backend/setting/setting_action.php",
+                method: "POST",
+                data: {
+                    id_site_del: id_site_del,
+                    action: action
+                },
+                success: function(data) {
+                    alert(data);
+                    load_data_site();
+                    /* var search_Partner = $('#search_Partner').val();
+                    if (search_Partner == '') {
+                        load_data();
+                    } else {
+                        load_data(search_Partner);
+                    } */
+
+                }
+            });
         }
 
     });
