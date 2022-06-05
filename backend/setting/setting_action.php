@@ -241,6 +241,100 @@ if (isset($_POST["action"])) {
     }
 
     //site
+    if ($_POST["action"] == "add_site") {
+        $sql = "INSERT INTO tbsite (
+            siteID,
+            siteName,
+            siteType,
+            siteDeveloper,
+            siteUnit,
+            siteTransfer,
+            siteStatus,
+            siteStartWork,
+            siteEndWork,
+            siteEntityStatus,
+            siteZoneNo,
+            siteZoneManager,
+            siteAreaManager,
+            siteJSW,
+            addDate,
+            addBy
+        )
+        VALUES
+            ('" . $_POST["txt_siteID"] . "', 
+            '" . $_POST["txt_siteName"] . "',
+            '" . $_POST["txt_siteType"] . "', 
+            '" . $_POST["txt_siteDeveloper"] . "', 
+            '" . $_POST["txt_siteUnit"] . "', 
+            '" . $_POST["txt_siteTransfer"] . "', 
+            'Active', 
+            '" . $_POST["txt_siteStartwork"] . "', 
+            '" . $_POST["txt_siteEndwork"] . "', 
+            '" . $_POST["list_siteEntityStatus"] . "', 
+            '" . $_POST["txt_siteZoneNo"] . "', 
+            '" . $_POST["txt_siteZoneManager"] . "', 
+            '" . $_POST["txt_siteAreaManager"] . "', 
+            '" . $_POST["list_siteJSW"] . "', 
+            '" . date("Y-m-d") . "', 
+            '" . $_SESSION['staffNameTH'] . "' )";
+
+
+        //$_SESSION["staffName"]
+
+        $query = $conn->query($sql);
+
+        if ($query) {
+            echo 'บันทึกข้อมูล สำเร็จ ';
+        } else {
+            echo 'บันทึกข้อมูล ไม่สำเร็จ!!';
+        }
+    }
+
+    if ($_POST["action"] == "fetch_edit_site") {
+        if (isset($_POST["id_site_edit"])) {
+            $stmt = "SELECT * FROM tbsite  WHERE siteID = '" . $_POST["id_site_edit"] . "' ";
+
+            $query = $conn->query($stmt);
+            $result = $query->fetch_array(MYSQLI_ASSOC);
+
+
+            echo json_encode($result);
+        }
+    }
+
+    if ($_POST["action"] == "edit_site") {
+
+        $stmt = " 
+		UPDATE tbsite
+		SET  
+		siteName = '" . $_POST['txt_siteName_e'] . "',
+        siteType = '" . $_POST['txt_siteType_e'] . "',
+        siteDeveloper = '" . $_POST['txt_siteDeveloper_e'] . "',
+        siteUnit = '" . $_POST['txt_siteUnit_e'] . "',
+        siteTransfer = '" . $_POST['txt_siteTransfer_e'] . "',
+        siteStartWork = '" . $_POST['txt_siteStartwork_e'] . "',
+        siteEndWork = '" . $_POST['txt_siteEndwork_e'] . "',
+        siteEntityStatus = '" . $_POST['list_siteEntityStatus_e'] . "',
+        siteZoneNo = '" . $_POST['txt_siteZoneNo_e'] . "',
+        siteZoneManager = '" . $_POST['txt_siteZoneManager_e'] . "',
+        siteAreaManager = '" . $_POST['txt_siteAreaManager_e'] . "',
+        siteJSW = '" . $_POST['list_siteJSW_e'] . "',
+		editDate = '" . date("Y-m-d") . "',
+		editBy = '" . $_SESSION['staffNameTH'] . "'
+	
+		WHERE siteID = '" . $_POST['txt_siteID_e'] . "'";
+
+        //$_SESSION["staffName"]
+
+        $query = $conn->query($stmt);
+
+        if ($query) {
+            echo 'แก้ไขข้อมูล สำเร็จ ';
+        } else {
+            echo 'แก้ไขข้อมูล ไม่สำเร็จ!!';
+        }
+    }
+
     if ($_POST["action"] == "del_site") {
         if (isset($_POST["id_site_del"])) {
             $stmt = "UPDATE tbsite

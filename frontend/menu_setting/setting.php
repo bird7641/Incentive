@@ -340,7 +340,7 @@
                                         <div class="col-md-4 px-1">
                                             <div class="form-group">
                                                 <label>ชื่อโครงการ</label>
-                                                <input type="text" class="form-control" id="txt_siteName" name="txt_siteFisrtName" placeholder="ชื่อโครงการ" value="">
+                                                <input type="text" class="form-control" id="txt_siteName" name="txt_siteName" placeholder="ชื่อโครงการ" value="">
                                             </div>
                                         </div>
                                         <div class="col-md-4 pl-1">
@@ -355,19 +355,19 @@
                                         <div class="col-md-4 pr-1">
                                             <div class="form-group">
                                                 <label>Developer</label>
-                                                <input type="text" class="form-control" id="txt_siteDeveloper" name="txt_siteDeveloper" placeholder="Developer" value="">
+                                                <input type="text" class="form-control" id="txt_siteDeveloper" name="txt_siteDeveloper" placeholder="Developer" value="" maxlength="10">
                                             </div>
                                         </div>
                                         <div class="col-md-4 px-1">
                                             <div class="form-group">
                                                 <label>Unit</label>
-                                                <input type="text" class="form-control" id="txt_siteUnit" name="txt_siteUnit" placeholder="Unit" value="">
+                                                <input type="number" class="form-control" id="txt_siteUnit" name="txt_siteUnit" placeholder="Unit" value="" maxlength="10">
                                             </div>
                                         </div>
                                         <div class="col-md-4 pl-1">
                                             <div class="form-group">
                                                 <label>Transfer</label>
-                                                <input type="text" class="form-control" id="txt_siteTransfer" name="txt_siteTransfer" placeholder="Transfer" value="">
+                                                <input type="number" class="form-control" id="txt_siteTransfer" name="txt_siteTransfer" placeholder="Transfer" value="" maxlength="10">
                                             </div>
                                         </div>
                                     </div>
@@ -384,6 +384,17 @@
                                             <div class="form-group">
                                                 <label>Site Endwork</label>
                                                 <input type="date" class="form-control" id="txt_siteEndwork" name="txt_siteEndwork" value="<?php echo date("Y-m-d"); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 pr-1">
+                                            <div class="form-group">
+                                                <label for="list_siteEntityStatus">ความเป็นนิติ</label>
+                                                <select id="list_siteEntityStatus" name="list_siteEntityStatus" class="form-control">
+                                                    <option value="" selected>Choose...</option>
+                                                    <option value="Y">เป็นนิติ</option>
+                                                    <option value="N">ไม่เป็นนิติ</option>
+                                                </select>
+
                                             </div>
                                         </div>
 
@@ -414,8 +425,13 @@
                                         </div>
                                         <div class="col-md-6 px-1">
                                             <div class="form-group">
-                                                <label>Join SMART World</label>
-                                                <input type="text" class="form-control" id="txt_siteJSW" name="txt_siteJSW" placeholder="Join SMART World" value="">
+
+                                                <label for="list_siteJSW">Join SMART World</label>
+                                                <select id="list_siteJSW" name="list_siteJSW" class="form-control">
+                                                    <option value="" selected>Choose...</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -478,7 +494,7 @@
                         <div class="col-md-4 px-1">
                             <div class="form-group">
                                 <label>ชื่อโครงการ</label>
-                                <input type="text" class="form-control" id="txt_siteName_e" name="txt_siteFisrtName_e" placeholder="ชื่อโครงการ" value="">
+                                <input type="text" class="form-control" id="txt_siteName_e" name="txt_siteName_e" placeholder="ชื่อโครงการ" value="">
                             </div>
                         </div>
                         <div class="col-md-4 pl-1">
@@ -515,13 +531,24 @@
                         <div class="col-md-4 pr-1">
                             <div class="form-group">
                                 <label>Site Startwork</label>
-                                <input type="date" class="form-control" id="txt_siteStartwork_e" name="txt_siteStartwork_e" value="<?php echo date("Y-m-d"); ?>">
+                                <input type="date" class="form-control" id="txt_siteStartwork_e" name="txt_siteStartwork_e" value="">
                             </div>
                         </div>
                         <div class="col-md-4 pr-1">
                             <div class="form-group">
                                 <label>Site Endwork</label>
-                                <input type="date" class="form-control" id="txt_siteEndwork_e" name="txt_siteEndwork_e" value="<?php echo date("Y-m-d"); ?>">
+                                <input type="date" class="form-control" id="txt_siteEndwork_e" name="txt_siteEndwork_e" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-4 pr-1">
+                            <div class="form-group">
+                                <label for="list_siteEntityStatus_e">ความเป็นนิติ</label>
+                                <select id="list_siteEntityStatus_e" name="list_siteEntityStatus_e" class="form-control">
+                                    <option value="" selected>Choose...</option>
+                                    <option value="Y">เป็นนิติ</option>
+                                    <option value="N">ไม่เป็นนิติ</option>
+                                </select>
+
                             </div>
                         </div>
 
@@ -552,8 +579,13 @@
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
-                                <label>Join SMART World</label>
-                                <input type="text" class="form-control" id="txt_siteJSW_e" name="txt_siteJSW_e" placeholder="Join SMART World" value="">
+
+                                <label for="list_siteJSW_e">Join SMART World</label>
+                                <select id="list_siteJSW_e" name="list_siteJSW_e" class="form-control">
+                                    <option value="" selected>Choose...</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -671,7 +703,7 @@
                     $('#frm_upload_file_staff')[0].reset();
 
                     $('#btn_upload_file_staff').attr('disabled', false);
-                    load_data();
+                    load_data_staff();
 
 
                 }
@@ -721,7 +753,7 @@
                     $('#frm_add_staff')[0].reset();
 
                     $('#btn_add_staff').attr('disabled', false);
-                    load_data();
+                    load_data_staff();
 
 
                 }
@@ -774,7 +806,7 @@
                 },
                 success: function(data) {
                     alert(data);
-                    load_data();
+                    load_data_staff();
                     /* var search_Partner = $('#search_Partner').val();
                     if (search_Partner == '') {
                         load_data();
@@ -835,7 +867,7 @@
 
                     $('#btn_edit_staff').attr('disabled', false);
 
-                    load_data();
+                    load_data_staff();
                     /*  var search_Partner = $('#search_Partner').val();
                      if (search_Partner == '') {
                          load_data();
@@ -916,21 +948,27 @@
     $('#frm_add_site').on('submit', function(event) {
         event.preventDefault();
         if ($('#txt_siteID').val() == '') {
-            alert("กรุณาใส่ รหัสพนักงาน");
-        } else if ($('#txt_siteFisrtName').val() == '') {
-            alert("กรุณาใส่ ชื่อ");
-        } else if ($('#txt_siteLastname').val() == '') {
-            alert("กรุณาใส่ นามสกุล");
-        } else if ($('#txt_sitePosition').val() == '') {
-            alert("กรุณาใส่ Position");
-        } else if ($('#txt_siteSection').val() == '') {
-            alert("กรุณาใส่ Section");
-        } else if ($('#txt_siteProfitcenter').val() == '') {
-            alert("กรุณาใส่ Profitcenter");
-        } else if ($('#txt_siteGroup').val() == '') {
-            alert("กรุณาใส่ Group");
-        } else if ($('#list_siteSiteID').val() == '') {
-            alert("กรุณาใส่ Site");
+            alert("กรุณาใส่ รหัสโครงการ");
+        } else if ($('#txt_siteName').val() == '') {
+            alert("กรุณาใส่ ชื่อโครงการ");
+        } else if ($('#txt_siteType').val() == '') {
+            alert("กรุณาใส่ siteType");
+        } else if ($('#txt_siteDeveloper').val() == '') {
+            alert("กรุณาใส่ Developer");
+        } else if ($('#txt_siteUnit').val() == '') {
+            alert("กรุณาใส่ Unit");
+        } else if ($('#txt_siteTransfer').val() == '') {
+            alert("กรุณาใส่ Transfer");
+        } else if ($('#txt_siteStartWork').val() == '') {
+            alert("กรุณาใส่ วันที่เริ่มบริหาร");
+        } else if ($('#txt_siteZoneNo').val() == '') {
+            alert("กรุณาใส่ Zone No");
+        } else if ($('#txt_siteZoneManager').val() == '') {
+            alert("กรุณาใส่ Zone Manager");
+        } else if ($('#txt_siteAreaManager').val() == '') {
+            alert("กรุณาใส่ Area Manager");
+        } else if ($('#list_siteJSW').val() == '') {
+            alert("กรุณาใส่ Join SMART World");
         } else {
             $('#btn_add_site').attr('disabled', true);
 
@@ -955,7 +993,7 @@
                     $('#frm_add_site')[0].reset();
 
                     $('#btn_add_site').attr('disabled', false);
-                    load_data();
+                    load_data_site();
 
 
                 }
@@ -978,15 +1016,18 @@
             dataType: "json",
             success: function(data) {
                 $("#txt_siteID_e").val(data.siteID);
-                $("#txt_siteNameTH_e").val(data.siteNameTH);
-                $("#txt_sitePosition_e").val(data.sitePosition);
-                $("#txt_siteSection_e").val(data.siteSection);
-                $("#txt_siteProfitcenter_e").val(data.siteProfitCenter);
-                $("#txt_siteGroup_e").val(data.siteGroup);
-                $("#txt_siteStartwork_e").val(data.siteStartWorkDate);
-                $("#txt_siteEndwork_e").val(data.siteEndWorkDate);
-                $("#list_siteLevel_e").val(data.siteLevel);
-                $("#list_siteSiteID_e").val(data.siteID);
+                $("#txt_siteName_e").val(data.siteName);
+                $("#txt_siteType_e").val(data.siteType);
+                $("#txt_siteDeveloper_e").val(data.siteDeveloper);
+                $("#txt_siteUnit_e").val(data.siteUnit);
+                $("#txt_siteTransfer_e").val(data.siteTransfer);
+                $("#txt_siteStartwork_e").val(data.siteStartWork);
+                $("#txt_siteEndwork_e").val(data.siteEndWork);
+                $("#txt_siteZoneNo_e").val(data.siteZoneNo);
+                $("#txt_siteZoneManager_e").val(data.siteZoneManager); 
+                $("#txt_siteAreaManager_e").val(data.siteAreaManager);
+                $("#list_siteJSW_e").val(data.siteJSW);
+                $("#list_siteEntityStatus_e").val(data.siteEntityStatus);
 
             }
         });
@@ -998,27 +1039,30 @@
         event.preventDefault();
 
         if ($('#txt_siteID_e').val() == '') {
-            alert("กรุณาติดต่อผู้พัฒนาระบบ");
-        } else if ($('#txt_siteNameTH_e').val() == '') {
-            alert("กรุณาใส่ ชื่อ");
-        } else if ($('#txt_sitePosition_e').val() == '') {
-            alert("กรุณาใส่ Position");
-        } else if ($('#txt_siteSection_e').val() == '') {
-            alert("กรุณาใส่ Section");
-        } else if ($('#txt_siteProfitcenter_e').val() == '') {
-            alert("กรุณาใส่ Profitcenter");
-        } else if ($('#txt_siteGroup_e').val() == '') {
-            alert("กรุณาใส่ Group");
+            alert("กรุณาใส่ รหัสโครงการ");
+        } else if ($('#txt_siteName_e').val() == '') {
+            alert("กรุณาใส่ ชื่อโครงการ");
+        } else if ($('#txt_siteType_e').val() == '') {
+            alert("กรุณาใส่ siteType");
+        } else if ($('#txt_siteDeveloper_e').val() == '') {
+            alert("กรุณาใส่ Developer");
+        } else if ($('#txt_siteUnit_e').val() == '') {
+            alert("กรุณาใส่ Unit");
+        } else if ($('#txt_siteTransfer_e').val() == '') {
+            alert("กรุณาใส่ Transfer");
         } else if ($('#txt_siteStartwork_e').val() == '') {
-            alert("กรุณาใส่ วันที่เริ่มงาน");
-        } else if ($('#list_siteLevel_e').val() == '') {
-            alert("กรุณาใส่ Level");
-        } else if ($('#list_siteSiteID_e').val() == '') {
-            alert("กรุณาใส่ Site");
+            alert("กรุณาใส่ วันที่เริ่มบริหาร");
+        } else if ($('#txt_siteZoneNo_e').val() == '') {
+            alert("กรุณาใส่ Zone No");
+        } else if ($('#txt_siteZoneManager_e').val() == '') {
+            alert("กรุณาใส่ Zone Manager");
+        } else if ($('#txt_siteAreaManager_e').val() == '') {
+            alert("กรุณาใส่ Area Manager");
+        } else if ($('#list_siteJSW_e').val() == '') {
+            alert("กรุณาใส่ Join SMART World");
         } else {
 
             $('#btn_edit_site').attr('disabled', true);
-
 
             $.ajax({
                 url: "../backend/setting/setting_action.php",

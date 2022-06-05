@@ -3,7 +3,7 @@ include("../../backend/dblink.php");
 
 
 ## ส่วนที่ 5 ดึงข้อมูลจากตารางในฐานข้อมูล mySQL เพื่อนำไปแสดงในช่อง DropDown ช่องที่ 2
-$strSQL2 = "select DISTINCT siteID,siteName from tbsite  WHERE siteStatus = 'Y' ORDER BY siteID";
+$strSQL2 = "select DISTINCT siteID,siteName from tbsite  WHERE siteStatus = 'Active' ORDER BY siteID";
 
 $querySQL2 = $conn->query($strSQL2);
 
