@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 04/06/2022 00:50:47
+ Date: 07/06/2022 17:04:29
 */
 
 SET NAMES utf8mb4;
@@ -159,6 +159,16 @@ INSERT INTO `tblog` VALUES ('2022-05-30', '18:11:18', '1', '127.0.0.1', 'Login',
 INSERT INTO `tblog` VALUES ('0000-00-00', '18:17:19', 'จิรานุวัฒน์ ตุณทกิจ', '127.0.0.1', 'Logout', 'ออกจากระบบด้วยตนเอง', '-');
 INSERT INTO `tblog` VALUES ('2022-05-30', '18:30:45', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
 INSERT INTO `tblog` VALUES ('2022-06-01', '21:10:02', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('2022-06-04', '14:37:11', '-', '127.0.0.1', 'Login', 'ระบุชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง', 'Username : 1');
+INSERT INTO `tblog` VALUES ('2022-06-04', '14:37:14', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('2022-06-05', '22:05:08', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('2022-06-07', '10:50:09', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('0000-00-00', '11:39:57', 'จิรานุวัฒน์ ตุณทกิจ', '127.0.0.1', 'Logout', 'ออกจากระบบด้วยตนเอง', '-');
+INSERT INTO `tblog` VALUES ('2022-06-07', '13:11:44', '-', '127.0.0.1', 'Login', 'ระบุชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง', 'Username : 10018166');
+INSERT INTO `tblog` VALUES ('2022-06-07', '13:11:50', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('0000-00-00', '13:59:57', 'จิรานุวัฒน์ ตุณทกิจ', '127.0.0.1', 'Logout', 'ออกจากระบบด้วยตนเอง', '-');
+INSERT INTO `tblog` VALUES ('2022-06-07', '14:00:07', '-', '127.0.0.1', 'Login', 'ระบุชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง', 'Username : 1');
+INSERT INTO `tblog` VALUES ('2022-06-07', '14:00:16', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
 
 -- ----------------------------
 -- Table structure for tbsite
@@ -175,11 +185,10 @@ CREATE TABLE `tbsite`  (
   `siteStartWork` date NULL DEFAULT NULL,
   `siteEndWork` date NULL DEFAULT NULL,
   `siteEntityStatus` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `siteZoneNo` int(11) NULL DEFAULT NULL,
+  `siteZoneNo` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `siteZoneManager` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `siteAreaManager` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `siteJSW` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'JoinSmartWorld',
-  `siteProfitCenter` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `addDate` date NULL DEFAULT NULL,
   `addBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `editDate` date NULL DEFAULT NULL,
@@ -190,7 +199,10 @@ CREATE TABLE `tbsite`  (
 -- ----------------------------
 -- Records of tbsite
 -- ----------------------------
-INSERT INTO `tbsite` VALUES ('1', 'โครงการวิภาวดี', 'tst', 'test', 100, 100, 'Active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tbsite` VALUES ('1', 'โครงการวิภาวดี', 'tst', 'test', 100, 100, 'Active', '2022-06-05', '1970-01-01', 'N', 'test', 'qwergwergv', 'wrgw', 'Yes', '2022-06-07', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbsite` VALUES ('10024', 'The Address สุขุมวิท 42 A', 'High Rise', 'AP', 114, 114, 'Active', '2007-11-12', '2022-06-05', 'Y', 'HR1', 'มานพ ศรีเขื่อนแก้ว', 'แนนนรินทร์ โรจนวิภาต', 'Yes', '2022-06-07', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbsite` VALUES ('2', 'testt', 'test', 'test', 1222, 1222, 'Active', '1970-01-01', '1970-01-01', 'Y', '0', 'qwergwergv', 'wrgw', 'gvwerfgwg', '2022-06-07', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbsite` VALUES ('3', 'testsdgwasd', 'test', 'test', 1222, 1231, 'Active', '2022-06-03', '2022-06-17', 'Y', '0', 'qwergwergv', 'wrgw', 'gvwerfgwg', '2022-06-07', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tbstaff
@@ -220,7 +232,7 @@ CREATE TABLE `tbstaff`  (
 -- ----------------------------
 -- Records of tbstaff
 -- ----------------------------
-INSERT INTO `tbstaff` VALUES ('1', '1', 'จิรานุวัฒน์ ตุณทกิจ', 'test', 'tres', 'dghgd', 'kjhgkjh', 'Y', '2022-05-01', '2023-05-01', '202CB962AC59075B964B07152D234B70', 'Y', 'SuperAdmin', '2022-05-29', 'Test', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ');
+INSERT INTO `tbstaff` VALUES ('1', '10024', 'จิรานุวัฒน์ ตุณทกิจ', 'test', 'tres', 'dghgd', 'kjhgkjh', 'Y', '2022-05-01', '2023-05-01', '202CB962AC59075B964B07152D234B70', 'Y', 'SuperAdmin', '2022-05-29', 'Test', '2022-06-05', 'จิรานุวัฒน์ ตุณทกิจ');
 INSERT INTO `tbstaff` VALUES ('2', '1', 'Test Test', 'test', 'tres', 'dghgd', 'kjhgkjh', 'N', '2022-05-01', '2023-05-01', 'C81E728D9D4C2F636F067F89CC14862C', 'N', 'Admin', '2022-05-29', 'Test', NULL, NULL);
 INSERT INTO `tbstaff` VALUES ('CMD0001', '1', 'Jiranuwat Tuntakij', 'Programmer', 'test', '123458', 'test', 'Y', '2022-05-30', '0000-00-00', 'D41D8CD98F00B204E9800998ECF8427E', 'N', 'User', '2022-05-30', 'Test', '2022-05-30', 'test');
 

@@ -241,6 +241,144 @@ if (isset($_POST["action"])) {
     }
 
     //site
+
+    if ($_POST["action"] == "upload_file_site") {
+
+        $inputFileName = $_FILES['file_site']['tmp_name'];
+
+        $arr_file = explode('.', $inputFileName);
+        $extension = end($arr_file);
+
+        if ('csv' == $extension) {
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+        } else if ('xlsx' == $extension) {
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        } else {
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+        }
+
+        $spreadsheet = $reader->load($inputFileName);
+
+        $sheetData = $spreadsheet->getActiveSheet()->toArray();
+
+
+
+        if (!empty($sheetData)) {
+
+            $siteID_head = $sheetData[0][0];
+            $siteName_head = $sheetData[0][1];
+            $siteType_head = $sheetData[0][2];
+            $siteDeveloper_head = $sheetData[0][3];
+            $siteUnit_head = $sheetData[0][4];
+            $siteTransfer_head = $sheetData[0][5];
+            $siteStatus_head = $sheetData[0][6];
+            $siteStartWork_head = $sheetData[0][7];
+            $siteEndWork_head = $sheetData[0][8];
+            $siteEntityStatus_head = $sheetData[0][9];
+            $siteZoneNo_head = $sheetData[0][10];
+            $siteZoneManager_head = $sheetData[0][11];
+            $siteAreaManager_head = $sheetData[0][12];
+            $siteJSW_head = $sheetData[0][13];
+
+
+            if (
+                $siteID_head == 'siteID' && 
+                $siteName_head == 'siteName' && 
+                $siteType_head == 'siteType' && 
+                $siteDeveloper_head == 'siteDeveloper' &&
+                $siteUnit_head == 'siteUnit' && 
+                $siteTransfer_head == 'siteTransfer' && 
+                $siteStatus_head == 'siteStatus' && 
+                $siteStartWork_head == 'siteStartWork' &&
+                $siteEndWork_head == 'siteEndWork' && 
+                $siteEntityStatus_head == 'siteEntityStatus' && 
+                $siteZoneNo_head == 'siteZoneNo' && 
+                $siteZoneManager_head == 'siteZoneManager' &&
+                $siteAreaManager_head == 'siteAreaManager' && 
+                $siteJSW_head == 'siteJSW'
+            ) {
+                for ($i = 1; $i < count($sheetData); $i++) {
+
+   
+                    $siteID = $sheetData[$i][0];
+                    $siteName = $sheetData[$i][1];
+                    $siteType = $sheetData[$i][2];
+                    $siteDeveloper = $sheetData[$i][3];
+                    $siteUnit = $sheetData[$i][4];
+                    $siteTransfer = $sheetData[$i][5];
+                    $siteStatus = $sheetData[$i][6];
+                    $siteStartWork = $sheetData[$i][7];
+                    $siteEndWork = $sheetData[$i][8];
+                    $siteEntityStatus = $sheetData[$i][9];
+                    $siteZoneNo = $sheetData[$i][10];
+                    $siteZoneManager = $sheetData[$i][11];
+                    $siteAreaManager = $sheetData[$i][12];
+                    $siteJSW = $sheetData[$i][13];
+
+                    $sql_check = "SELECT COUNT(siteID) AS countID FROM tbsite WHERE siteID = '" . $siteID . "' ";
+                    $query_check = $conn->query($sql_check);
+                    $result_check = $query_check->fetch_array(MYSQLI_ASSOC);
+
+                    $countID =  $result_check['countID'];
+
+                    if ((int)$countID != 0) {
+                        echo "รหัสโครงการ : " . $siteID  . " มีอยู่ในระบบแล้ว \n";
+                    } else {
+
+                        $sql = "INSERT INTO tbsite (
+                            siteID,
+                            siteName,
+                            siteType,
+                            siteDeveloper,
+                            siteUnit,
+                            siteTransfer,
+                            siteStatus,
+                            siteStartWork,
+                            siteEndWork,
+                            siteEntityStatus,
+                            siteZoneNo,
+                            siteZoneManager,
+                            siteAreaManager,
+                            siteJSW,
+                            addDate,
+                            addBy
+                        )
+                        VALUES
+                        ( '" . $siteID . "',
+                            '" . $siteName . "',
+                            '" . $siteType . "',
+                            '" . $siteDeveloper . "',
+                            '" . $siteUnit . "',
+                            '" . $siteTransfer . "',
+                            '" . $siteStatus . "',
+                            '" . $siteStartWork . "',
+                            '" . $siteEndWork . "',
+                            '" . $siteEntityStatus . "',
+                            '" . $siteZoneNo . "',
+                            '" . $siteZoneManager . "',
+                            '" . $siteAreaManager . "',
+                            '" . $siteJSW . "',
+                            '" . date("Y-m-d") . "',
+                        '" . $_SESSION['staffNameTH'] . "' 
+                        ) ";
+
+                        $query_site = $conn->query($sql);
+
+                        if ($query_site) {
+                        } else {
+                            echo "Error";
+                        }
+                    }
+                }
+                echo "บันทึกข้อมูล สำเร็จ";
+            } else {
+                echo "File ใช้นี้ไม่ได้";
+            }
+        } else {
+            echo "File นี้ไม่มีข้อมูล";
+        }
+    }
+
     if ($_POST["action"] == "add_site") {
         $sql = "INSERT INTO tbsite (
             siteID,

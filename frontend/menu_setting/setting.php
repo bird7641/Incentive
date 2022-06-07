@@ -937,7 +937,7 @@
                     $('#frm_upload_file_site')[0].reset();
 
                     $('#btn_upload_file_site').attr('disabled', false);
-                    load_data();
+                    load_data_site();
 
 
                 }
