@@ -134,9 +134,22 @@
                                                 <label for="list_staffLevel">Level</label>
                                                 <select id="list_staffLevel" name="list_staffLevel" class="form-control">
                                                     <option value="" selected>Choose...</option>
-                                                    <option value="User">User</option>
-                                                    <option value="Admin">Admin</option>
-                                                    <option value="SuperAdmin">SuperAdmin</option>
+
+                                                    <?php
+                                                    if ($_SESSION['staffLevel'] == 'Admin') {
+                                                    ?>
+                                                        <option value="User">User</option>
+                                                        <option value="Admin">Admin</option>
+                                                    <?php
+                                                    } elseif ($_SESSION['staffLevel'] == 'SuperAdmin') {
+
+                                                    ?>
+                                                        <option value="User">User</option>
+                                                        <option value="Admin">Admin</option>
+                                                        <option value="SuperAdmin">SuperAdmin</option>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -266,9 +279,21 @@
                                 <label for="list_staffLevel_e">Level</label>
                                 <select id="list_staffLevel_e" name="list_staffLevel_e" class="form-control">
                                     <option value="" selected>Choose...</option>
-                                    <option value="User">User</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="SuperAdmin">SuperAdmin</option>
+                                    <?php
+                                    if ($_SESSION['staffLevel'] == 'Admin') {
+                                    ?>
+                                        <option value="User">User</option>
+                                        <option value="Admin">Admin</option>
+                                    <?php
+                                    } elseif ($_SESSION['staffLevel'] == 'SuperAdmin') {
+
+                                    ?>
+                                        <option value="User">User</option>
+                                        <option value="Admin">Admin</option>
+                                        <option value="SuperAdmin">SuperAdmin</option>
+                                    <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -1024,7 +1049,7 @@
                 $("#txt_siteStartwork_e").val(data.siteStartWork);
                 $("#txt_siteEndwork_e").val(data.siteEndWork);
                 $("#txt_siteZoneNo_e").val(data.siteZoneNo);
-                $("#txt_siteZoneManager_e").val(data.siteZoneManager); 
+                $("#txt_siteZoneManager_e").val(data.siteZoneManager);
                 $("#txt_siteAreaManager_e").val(data.siteAreaManager);
                 $("#list_siteJSW_e").val(data.siteJSW);
                 $("#list_siteEntityStatus_e").val(data.siteEntityStatus);

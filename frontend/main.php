@@ -57,38 +57,44 @@
               <p>Dashboard</p>
             </a>
           </li>
-          <li>
-            <a href="main.php?page=timestamp">
-              <i class="now-ui-icons tech_watch-time"></i>
-              <p>Timestamp</p>
-            </a>
-          </li>
-          <li>
-            <a href="main.php?page=complaint">
-              <i class="now-ui-icons files_paper"></i>
-              <p>Complaint</p>
-            </a>
-          </li>
-          <li>
-          <li>
-            <a href="main.php?page=commu">
-              <i class="now-ui-icons location_world"></i>
-              <p>Commu</p>
-            </a>
-          </li>
-          <li>
-          <li>
-            <a href="main.php?page=warning">
-              <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>Warning</p>
-            </a>
-          </li>
-          <li>
-            <a href="main.php?page=setting">
-              <i class="now-ui-icons loader_gear"></i>
-              <p>Setting</p>
-            </a>
-          </li>
+          <?php
+          if ($_SESSION["staffLevel"] == 'SuperAdmin' ||  $_SESSION["staffLevel"] == 'Admin') {
+          ?>
+            <li>
+              <a href="main.php?page=timestamp">
+                <i class="now-ui-icons tech_watch-time"></i>
+                <p>Timestamp</p>
+              </a>
+            </li>
+            <li>
+              <a href="main.php?page=complaint">
+                <i class="now-ui-icons files_paper"></i>
+                <p>Complaint</p>
+              </a>
+            </li>
+            <li>
+            <li>
+              <a href="main.php?page=commu">
+                <i class="now-ui-icons location_world"></i>
+                <p>Commu</p>
+              </a>
+            </li>
+            <li>
+            <li>
+              <a href="main.php?page=warning">
+                <i class="now-ui-icons ui-1_bell-53"></i>
+                <p>Warning</p>
+              </a>
+            </li>
+            <li>
+              <a href="main.php?page=setting">
+                <i class="now-ui-icons loader_gear"></i>
+                <p>Setting</p>
+              </a>
+            </li>
+          <?php
+          }
+          ?>
           <li>
             <a href="../backend/index/logout.php">
               <i class="now-ui-icons media-1_button-power"></i>

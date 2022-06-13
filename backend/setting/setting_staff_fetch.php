@@ -1,5 +1,3 @@
-
-
 <?php
 
 //fetch.php
@@ -71,15 +69,29 @@ $query = $conn->query($stmt);
                 <td class="text-center"><?php echo $result["staffNameTH"]; ?></td>
                 <td class="text-center"><?php echo $result["staffPosition"]; ?></td>
                 <td class="text-center"><?php echo $result["siteName"]; ?></td>
-
                 <td class="text-center">
-                    <button type="button" class="btn btn-success btn-sm btn-round btn-icon btn-sm edit_staff" data-toggle="modal" data-target="#modal_edit_staff" name="edit_staff" title="แก้ไขข้อมูล staff" id_staff_edit="<?php echo $result["staffID"]; ?>">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
-                    </button>
-                    <button type="button" class="btn btn-danger btn-sm btn-round btn-icon btn-sm del_staff" name="del_staff" title="ลบข้อมูล staff" id_staff_del="<?php echo $result["staffID"]; ?>">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                    </button>
+                    <?php
+                    if ($result['staffLevel'] == 'Admin' || $result['staffLevel'] == 'User') {
+                    ?>
 
+                        <button type="button" class="btn btn-success btn-sm btn-round btn-icon btn-sm edit_staff" data-toggle="modal" data-target="#modal_edit_staff" name="edit_staff" title="แก้ไขข้อมูล staff" id_staff_edit="<?php echo $result["staffID"]; ?>">
+                            <i class="now-ui-icons ui-2_settings-90"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm btn-round btn-icon btn-sm del_staff" name="del_staff" title="ลบข้อมูล staff" id_staff_del="<?php echo $result["staffID"]; ?>">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </button>
+
+                        <?php
+                    } elseif ($result['staffLevel'] == 'SuperAdmin') {
+                        if ($result["staffID"] == $_SESSION['staffID']) {
+                        ?>
+                            <button type="button" class="btn btn-success btn-sm btn-round btn-icon btn-sm edit_staff" data-toggle="modal" data-target="#modal_edit_staff" name="edit_staff" title="แก้ไขข้อมูล staff" id_staff_edit="<?php echo $result["staffID"]; ?>">
+                                <i class="now-ui-icons ui-2_settings-90"></i>
+                            </button>
+                    <?php
+                        }
+                    }
+                    ?>
                 </td>
             </tr>
         <?php
