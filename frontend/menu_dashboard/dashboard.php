@@ -158,7 +158,7 @@
                     <h4 class="card-title">SUM Dashboard</h4>
                 </div>
                 <div class="card-body">
-                   
+
                     <div class="row">
 
                         <div class="col-lg-6 col-md-12">
@@ -175,6 +175,38 @@
 
 
 
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-category">Report</h5>
+                    <h4 class="card-title">Report Dashboard</h4>
+                </div>
+                <div class="card-body">
+
+
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 text-center">
+                            <input type="text" class="form-control" id="textsearch" name="textsearch" placeholder="Search...." style="width: 50%;">
+                        </div>
+                        <!-- <div class="col-lg-6 col-md-12 text-center">
+                            <h5>Incentive</h5>
+                        </div> -->
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 text-center">
+                            <img id="loading_image_table" src="../frontend/img/icon/Spinner_loader.gif" style="display: none;" />
+                            <div id="table_Dashboard"> </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
     </div>
 
 </div>
@@ -214,4 +246,40 @@
     setTimeout(function() {
         load_data_dashboard();
     }, 1000);
+
+    function load_data_dashboard_report(query = '') {
+        var textsearch = $('#textsearch').val();
+        /* var hidden_list_TP_search = $('#hidden_list_TP_search').val(); */
+        // var query2 = $('#hidden_country').val();
+        $.ajax({
+            url: "../backend/dashboard/dashboard_report_fetch.php",
+            method: "POST",
+            data: {
+                query: query,
+                textsearch: textsearch
+            },
+            beforeSend: function() {
+                $("#loading_image_table").show();
+                $('#table_Dashboard').hide();
+            },
+            success: function(data) {
+                $('#table_Dashboard').html(data);
+                $("#loading_image_table").hide();
+                $('#table_Dashboard').show();
+            }
+
+        });
+    }
+
+    setTimeout(function() {
+        load_data_dashboard_report();
+    }, 1000);
+
+    $('#textsearch').keyup(function() {
+        var textsearch = $(this).val();
+        if (textsearch != '') {
+            load_data_dashboard_report(textsearch);
+        }
+
+    });
 </script>
