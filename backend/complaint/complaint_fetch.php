@@ -5,21 +5,36 @@
 //fetch.php
 //session_start();
 include("../../backend/dblink.php");
-
-/* $hidden_list_ap_search = $_POST["hidden_list_ap_search"];
-
-$hidden_list_TP_search = $_POST["hidden_list_TP_search"];
- */
+$textsearch = $_POST["textsearch"];
+$textsearchMonth = $_POST["textsearchMonth"];
+$textsearchYear = $_POST["textsearchYear"];
+ 
 $stmt = "SELECT
-complaintID,
-complaintType,
-complaintDetail,
-complaintSource,
-complaintDate,
-staffNameTH 
+tbcomplaint.complaintID,
+tbcomplaint.complaintType,
+tbcomplaint.complaintDetail,
+tbcomplaint.complaintSource,
+tbcomplaint.complaintDate,
+tbstaff.staffNameTH 
 FROM
 tbcomplaint
 LEFT OUTER JOIN tbstaff ON tbstaff.staffID = tbcomplaint.staffID ";
+
+if ($textsearch != "" && $textsearchMonth != "" && $textsearchYear != "") {
+    $stmt = $stmt . "WHERE (tbstaff.staffID LIKE '%" . $textsearch . "%' OR tbstaff.staffNameTH LIKE '%" . $textsearch . "%' ) AND MONTH(tbcomplaint.complaintDate) = '" . $textsearchMonth . "' AND YEAR(tbcomplaint.complaintDate) = '" . $textsearchYear . "' ";
+} elseif ($textsearch != "" && $textsearchMonth != "") {
+    $stmt = $stmt . "WHERE (tbstaff.staffID LIKE '%" . $textsearch . "%' OR tbstaff.staffNameTH LIKE '%" . $textsearch . "%' ) AND MONTH(tbcomplaint.complaintDate) = '" . $textsearchMonth . "'  ";
+} elseif ($textsearch != ""  && $textsearchYear != "") {
+    $stmt = $stmt . "WHERE (tbstaff.staffID LIKE '%" . $textsearch . "%' OR tbstaff.staffNameTH LIKE '%" . $textsearch . "%' ) AND YEAR(tbcomplaint.complaintDate) = '" . $textsearchYear . "'  ";
+} elseif ($textsearchMonth != "" && $textsearchYear != "") {
+    $stmt = $stmt . "WHERE  MONTH(tbcomplaint.complaintDate) = '" . $textsearchMonth . "' AND YEAR(tbcomplaint.complaintDate) = '" . $textsearchYear . "'  ";
+} elseif ($textsearch != "") {
+    $stmt = $stmt . "WHERE  (tbstaff.staffID LIKE '%" . $textsearch . "%' OR tbstaff.staffNameTH LIKE '%" . $textsearch . "%' )  ";
+} elseif ($textsearchMonth != "") {
+    $stmt = $stmt . "WHERE MONTH(tbcomplaint.complaintDate) = '" . $textsearchMonth . "' ";
+} elseif ($textsearchYear != "") {
+    $stmt = $stmt . "WHERE YEAR(tbcomplaint.complaintDate) = '" . $textsearchYear . "' ";
+}
 
 $stmt = $stmt . "ORDER BY tbstaff.staffID ASC";
 //$stmt = $stmt . "WHERE partnerStatus = 'Y' AND partnerName LIKE '%".$_POST['query']."%' ";
@@ -83,19 +98,7 @@ $query = $conn->query($stmt);
     </tbody>
 </table>
 
-<style>
-  /*   table td {
 
-        max-width: 120px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
-
-    table td:hover {
-        overflow: visible;
-    } */
-</style>
 
 
 <script type="text/javascript">

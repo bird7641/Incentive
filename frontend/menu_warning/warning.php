@@ -12,6 +12,45 @@
 
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-12 text-center">
+                        <input type="hidden" class="form-control" id="textsearchYear" name="textsearchYear" placeholder="Search....">
+                        <select class="form-control" id="list_searchYear" name="list_searchYear">
+                            <option value="">เลือกปี</option>
+                            <?php
+
+                            $str_Year = "SELECT distinct YEAR(warnDate) AS Year from tbwarning ORDER BY warnDate DESC ";
+
+                            $Result_Year = $conn->query($str_Year);
+                            while ($Year_list_Array = $Result_Year->fetch_array(MYSQLI_ASSOC)) {
+                                $Year = $Year_list_Array['Year'];
+                                echo "<option value='" . $Year . "' >" . $Year . "</option>";
+                            }
+                            ?>
+
+                        </select>
+                    </div>
+                    <div class="col-lg-3 col-md-12 text-center">
+                        <input type="hidden" class="form-control" id="textsearchMonth" name="textsearchMonth" placeholder="Search....">
+                        <select class="form-control" id="list_searchMonth" name="list_searchMonth">
+                            <option value="">เลือกเดือน</option>
+                            <?php
+
+                            $str_Month = "SELECT distinct MONTH(warnDate) AS Month from tbwarning ORDER BY warnDate DESC ";
+
+                            $Result_Month = $conn->query($str_Month);
+                            while ($Month_list_Array = $Result_Month->fetch_array(MYSQLI_ASSOC)) {
+                                $Month = $Month_list_Array['Month'];
+                                echo "<option value='" . $Month . "' >" . $Month . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-12 text-center">
+                        <input type="text" class="form-control" id="textsearch" name="textsearch" placeholder="Search....">
+                    </div>
+
+                </div>
             </div>
             <div class="card-body text-center">
                 <img id="loading_image_table" src="../frontend/img/icon/Spinner_loader.gif" style="display: none;" />
@@ -73,28 +112,10 @@
 
                             <div class="form-group col-md-12">
                                 <label for="txt_warnDetail_e">Warn Detail</label>
-                                <input type="text" class="form-control" id="txt_warnDetail_e" name="txt_warnDetail_e">
+                                <textarea type="text" class="form-control" id="txt_warnDetail_e" name="txt_warnDetail_e" style="font-size: 15px;"></textarea>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="txt_warn1_e">วาจา</label>
-                                <input type="text" class="form-control" id="txt_warn1_e" name="txt_warn1_e" value="" maxlength="1" onKeyUp="IsNumeric(this.value,this)">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="txt_warn2_e">อักษร1</label>
-                                <input type="text" class="form-control" id="txt_warn2_e" name="txt_warn2_e" value="" maxlength="1" onKeyUp="IsNumeric(this.value,this)">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="txt_warn3_e">อักษร2</label>
-                                <input type="text" class="form-control" id="txt_warn3_e" name="txt_warn3_e" value="" maxlength="1" onKeyUp="IsNumeric(this.value,this)">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="txt_warn4_e">อักษร3</label>
-                                <input type="text" class="form-control" id="txt_warn4_e" name="txt_warn4_e" value="" maxlength="1" onKeyUp="IsNumeric(this.value,this)">
-                            </div>
 
-                        </div>
 
                     </div>
                     <div class="modal-footer">
@@ -114,14 +135,17 @@
 
 <script>
     function load_data(query = '') {
-        /*   var hidden_list_ap_search = $('#hidden_list_ap_search').val();
-          var hidden_list_TP_search = $('#hidden_list_TP_search').val(); */
-        // var query2 = $('#hidden_country').val();
+        var textsearch = $('#textsearch').val();
+        var textsearchMonth = $('#textsearchMonth').val();
+        var textsearchYear = $('#textsearchYear').val();
         $.ajax({
             url: "../backend/warning/warning_fetch.php",
             method: "POST",
             data: {
-                query: query
+                query: query,
+                textsearch: textsearch,
+                textsearchMonth: textsearchMonth,
+                textsearchYear: textsearchYear
             },
             beforeSend: function() {
                 $("#loading_image_table").show();
@@ -139,6 +163,20 @@
         load_data();
     }, 1000);
 
+    $('#textsearch').keyup(function() {
+        var textsearch = $(this).val();
+        load_data(textsearch);
+    });
+    $('#list_searchMonth').change(function() {
+        $('#textsearchMonth').val($('#list_searchMonth').val());
+        var textsearchMonth = $('#textsearchMonth').val();
+        load_data(textsearchMonth);
+    });
+    $('#list_searchYear').change(function() {
+        $('#textsearchYear').val($('#list_searchYear').val());
+        var textsearchYear = $('#textsearchYear').val();
+        load_data(textsearchYear);
+    });
 
     $('#frm_upload_file_warning').on('submit', function(event) {
         event.preventDefault();
@@ -193,12 +231,9 @@
                 $("#txt_staffID_e").val(data.staffID);
                 $("#txt_staffNameTH_e").val(data.staffNameTH);
                 $("#txt_warnDetail_e").val(data.warnDetail);
-                $("#txt_warn1_e").val(data.warn1);
-                $("#txt_warn2_e").val(data.warn2);
-                $("#txt_warn3_e").val(data.warn3);
-                $("#txt_warn4_e").val(data.warn4);
+
                 $("#txt_warnID_e").val(id_warning_edit);
-                
+
             }
         });
     });
@@ -211,14 +246,6 @@
             alert("กรุณาติดต่อผู้พัฒนาระบบ");
         } else if ($('#txt_warnDetail_e').val() == '') {
             alert("กรุณาใส่รายละเอียด Warning");
-        } else if ($('#txt_warn1_e').val() == '') {
-            alert("กรุณาใส่ วาจา");
-        } else if ($('#txt_warn2_e').val() == '') {
-            alert("กรุณาใส่ อักษร1");
-        } else if ($('#txt_warn3_e').val() == '') {
-            alert("กรุณาใส่ อักษร2");
-        } else if ($('#txt_warn4_e').val() == '') {
-            alert("กรุณาใส่ อักษร3");
         } else {
 
             $('#btn_edit_file_warning').attr('disabled', true);

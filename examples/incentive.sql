@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 13/06/2022 19:06:58
+ Date: 05/07/2022 21:35:39
 */
 
 SET NAMES utf8mb4;
@@ -31,13 +31,14 @@ CREATE TABLE `tbcommu`  (
   `editDate` date NULL DEFAULT NULL,
   `editBy` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`commuID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tbcommu
 -- ----------------------------
-INSERT INTO `tbcommu` VALUES (9, '1', 6, '2022-04-28', '2022-06-03', 'จิรานุวัฒน์ ตุณทกิจ', '2022-06-03', 'จิรานุวัฒน์ ตุณทกิจ');
-INSERT INTO `tbcommu` VALUES (11, '2', 5, '2022-04-28', '2022-06-03', 'จิรานุวัฒน์ ตุณทกิจ', '2022-06-03', 'จิรานุวัฒน์ ตุณทกิจ');
+INSERT INTO `tbcommu` VALUES (12, '1', 4, '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ');
+INSERT INTO `tbcommu` VALUES (13, '2', 4, '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ');
+INSERT INTO `tbcommu` VALUES (14, '3', 2, '2022-06-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ');
 
 -- ----------------------------
 -- Table structure for tbcomplaint
@@ -49,19 +50,19 @@ CREATE TABLE `tbcomplaint`  (
   `complaintType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ประเภทเรื่อง',
   `complaintDetail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'รายละเอียด',
   `complaintSource` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'แหล่งที่มา',
-  `complaintDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `complaintDate` date NULL DEFAULT NULL,
   `addDate` date NULL DEFAULT NULL,
   `addBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `editDate` date NULL DEFAULT NULL,
   `editBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`complaintID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tbcomplaint
 -- ----------------------------
-INSERT INTO `tbcomplaint` VALUES (3, '1', 'test', 'test', 'test', '2022-06-03', '2022-06-04', 'จิรานุวัฒน์ ตุณทกิจ', '2022-06-04', 'จิรานุวัฒน์ ตุณทกิจ');
-INSERT INTO `tbcomplaint` VALUES (4, '3', 'ความสุภาพ-มารยาทในการให้บริการ', 'ร้องเรียนความสุภาพและมารยาทในการให้บริการของช่างประจำอาคาร ', 'SSM Call', '2022-06-10', '2022-06-04', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbcomplaint` VALUES (1, '1', 'ความสุภาพในการให้บริการ_Services Mind', '\"คุณชญานิษฐ์ แจ้งร้องเรียน นิติฯคุณฝน (ไม่ทราบชื่อจริง) เรื่อง Service Mind ของเจ้าหน้าที่ จากกรณี 1.ลูกค้าแจ้งซ่อมตัวบ้านกับทางนิติฯ นิติฯแจ้งว่าจะแจ้งช่างโครงการให้ ไม่อยากแจ้งเข้าส่วนกลางเพราะช้า ซึ่งหลังจากที่แจ้งนิติฯไปเป็นสัปดาห์แล้วก็ยังไม่ได้รับกา', 'Website –  APthai.com', '2022-04-03', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbcomplaint` VALUES (2, '1', 'ความสุภาพ-มารยาทในการให้บริการ', 'ร้องเรียนความสุภาพและมารยาทในการให้บริการของช่างประจำอาคาร ', 'SSM Call', '2022-04-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tbemp
@@ -76,49 +77,33 @@ CREATE TABLE `tbemp`  (
   `Late_Actual` int(1) NULL DEFAULT NULL,
   `Absence_Target` int(1) NULL DEFAULT NULL,
   `Absence_Actual` int(1) NULL DEFAULT NULL,
-  `Complaint_Target` int(1) NULL DEFAULT NULL,
-  `Complaint_Actual` int(1) NULL DEFAULT NULL,
-  `Warning` int(1) NULL DEFAULT NULL,
   `empDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `addDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `addBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `editDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `editBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`empID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tbemp
 -- ----------------------------
-INSERT INTO `tbemp` VALUES (1, '1', 4, 2, 0, NULL, 0, NULL, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-06-03', 'จิรานุวัฒน์ ตุณทกิจ');
-INSERT INTO `tbemp` VALUES (2, '2', 4, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-06-03', 'จิรานุวัฒน์ ตุณทกิจ');
-INSERT INTO `tbemp` VALUES (3, '3', NULL, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-05-29', 'test');
-INSERT INTO `tbemp` VALUES (4, '4', NULL, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-05-29', 'test');
-INSERT INTO `tbemp` VALUES (5, '5', NULL, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-05-29', 'test');
-INSERT INTO `tbemp` VALUES (6, '6', NULL, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-05-29', 'test');
-INSERT INTO `tbemp` VALUES (7, '7', NULL, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-05-29', 'test');
-INSERT INTO `tbemp` VALUES (8, '8', NULL, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', '2022-05-29', 'test');
-INSERT INTO `tbemp` VALUES (9, '9', NULL, NULL, 0, 1, 0, 1, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', NULL, NULL);
-INSERT INTO `tbemp` VALUES (10, '10', NULL, NULL, 0, 2, 0, 2, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', NULL, NULL);
-INSERT INTO `tbemp` VALUES (11, '11', NULL, NULL, 0, 3, 0, 3, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', NULL, NULL);
-INSERT INTO `tbemp` VALUES (12, '12', NULL, NULL, 0, 4, 0, 4, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', NULL, NULL);
-INSERT INTO `tbemp` VALUES (13, '13', NULL, NULL, 0, 5, 0, 5, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', NULL, NULL);
-INSERT INTO `tbemp` VALUES (14, '14', NULL, NULL, 0, 6, 0, 6, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', NULL, NULL);
-INSERT INTO `tbemp` VALUES (15, '15', NULL, NULL, 0, 7, 0, 7, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', NULL, NULL);
-INSERT INTO `tbemp` VALUES (16, '16', NULL, NULL, 0, 8, 0, 8, NULL, NULL, NULL, '2022-04-28', '2022-05-29', 'test', NULL, NULL);
-INSERT INTO `tbemp` VALUES (17, 'CR003119', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbemp` VALUES (18, 'CR003633', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbemp` VALUES (19, 'CR003446', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbemp` VALUES (20, 'CR001465', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbemp` VALUES (21, 'CR002925', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbemp` VALUES (22, 'CR003665', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbemp` VALUES (23, 'CR003692', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbemp` VALUES (24, 'CR003678', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbemp` VALUES (25, 'CR003807', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbemp` VALUES (26, 'CR001869', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbemp` VALUES (27, 'CR002268', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbemp` VALUES (28, 'CR003380', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbemp` VALUES (29, 'CR003059', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbemp` VALUES (1, '1', 4, 4, 0, 4, 0, 7, '2022-04-10', '2022-07-05', 'test', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ');
+INSERT INTO `tbemp` VALUES (2, '2', 4, 4, 0, 4, 0, 4, '2022-04-10', '2022-07-05', 'test', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ');
+INSERT INTO `tbemp` VALUES (3, '3', 4, 2, 0, 4, 0, 4, '2022-06-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (4, '4', NULL, NULL, 0, 4, 0, 4, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (5, '5', NULL, NULL, 0, 4, 0, 4, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (6, '6', NULL, NULL, 0, 4, 0, 4, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (7, '7', NULL, NULL, 0, 4, 0, 4, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (8, '8', NULL, NULL, 0, 4, 0, 4, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (9, '9', NULL, NULL, 0, 1, 0, 1, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (10, '10', NULL, NULL, 0, 2, 0, 2, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (11, '11', NULL, NULL, 0, 3, 0, 3, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (12, '12', NULL, NULL, 0, 4, 0, 4, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (13, '13', NULL, NULL, 0, 5, 0, 5, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (14, '14', NULL, NULL, 0, 6, 0, 6, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (15, '15', NULL, NULL, 0, 7, 0, 7, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
+INSERT INTO `tbemp` VALUES (16, '16', NULL, NULL, 0, 8, 0, 8, '2022-04-28', '2022-07-05', 'test', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tblog
@@ -182,6 +167,31 @@ INSERT INTO `tblog` VALUES ('0000-00-00', '19:04:43', 'จิรานุวั�
 INSERT INTO `tblog` VALUES ('2022-06-13', '19:04:50', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
 INSERT INTO `tblog` VALUES ('0000-00-00', '19:05:22', 'จิรานุวัฒน์ ตุณทกิจ', '127.0.0.1', 'Logout', 'ออกจากระบบด้วยตนเอง', '-');
 INSERT INTO `tblog` VALUES ('2022-06-13', '19:05:27', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('2022-06-17', '21:31:36', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('0000-00-00', '21:33:51', 'จิรานุวัฒน์ ตุณทกิจ', '127.0.0.1', 'Logout', 'ออกจากระบบด้วยตนเอง', '-');
+INSERT INTO `tblog` VALUES ('2022-06-17', '21:33:53', '-', '127.0.0.1', 'Login', 'ระบุชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง', 'Username : 10018166');
+INSERT INTO `tblog` VALUES ('2022-06-17', '21:34:33', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('2022-06-17', '21:36:11', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('2022-06-17', '23:09:20', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('2022-07-02', '23:49:38', '-', '127.0.0.1', 'Login', 'ระบุชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง', 'Username : jtuntakij');
+INSERT INTO `tblog` VALUES ('2022-07-02', '23:50:15', '-', '127.0.0.1', 'Login', 'ระบุชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง', 'Username : 1');
+INSERT INTO `tblog` VALUES ('2022-07-02', '23:50:33', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('2022-07-05', '12:26:43', '-', '127.0.0.1', 'Login', 'ระบุชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง', 'Username : 1');
+INSERT INTO `tblog` VALUES ('2022-07-05', '12:26:50', '-', '127.0.0.1', 'Login', 'ระบุชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง', 'Username : 1');
+INSERT INTO `tblog` VALUES ('2022-07-05', '12:26:55', '-', '127.0.0.1', 'Login', 'ระบุชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง', 'Username : 1');
+INSERT INTO `tblog` VALUES ('2022-07-05', '12:27:01', '-', '127.0.0.1', 'Login', 'ระบุชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง', 'Username : 1');
+INSERT INTO `tblog` VALUES ('2022-07-05', '12:27:12', '-', '127.0.0.1', 'Login', 'ระบุชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง', 'Username : 1');
+INSERT INTO `tblog` VALUES ('2022-07-05', '12:27:23', '-', '127.0.0.1', 'Login', 'ระบุชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง', 'Username : 1');
+INSERT INTO `tblog` VALUES ('2022-07-05', '12:27:40', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('0000-00-00', '14:38:46', 'จิรานุวัฒน์ ตุณทกิจ', '127.0.0.1', 'Logout', 'ออกจากระบบด้วยตนเอง', '-');
+INSERT INTO `tblog` VALUES ('2022-07-05', '14:38:58', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('0000-00-00', '14:39:13', 'จิรานุวัฒน์ ตุณทกิจ', '127.0.0.1', 'Logout', 'ออกจากระบบด้วยตนเอง', '-');
+INSERT INTO `tblog` VALUES ('2022-07-05', '14:39:17', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('2022-07-05', '15:08:40', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('0000-00-00', '16:56:25', 'จิรานุวัฒน์ ตุณทกิจ', '127.0.0.1', 'Logout', 'ออกจากระบบด้วยตนเอง', '-');
+INSERT INTO `tblog` VALUES ('2022-07-05', '16:56:43', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
+INSERT INTO `tblog` VALUES ('0000-00-00', '20:55:27', 'จิรานุวัฒน์ ตุณทกิจ', '127.0.0.1', 'Logout', 'ออกจากระบบด้วยตนเอง', '-');
+INSERT INTO `tblog` VALUES ('2022-07-05', '21:02:04', '1', '127.0.0.1', 'Login', 'เข้าใช้งานระบบได้ตามปกติ', '-');
 
 -- ----------------------------
 -- Table structure for tbsite
@@ -247,7 +257,7 @@ CREATE TABLE `tbstaff`  (
 -- ----------------------------
 INSERT INTO `tbstaff` VALUES ('1', '10024', 'จิรานุวัฒน์ ตุณทกิจ', 'test', 'tres', 'dghgd', 'kjhgkjh', 'Y', '2022-05-01', '2023-05-01', '202CB962AC59075B964B07152D234B70', 'Y', 'SuperAdmin', '2022-05-29', 'Test', '2022-06-13', 'จิรานุวัฒน์ ตุณทกิจ');
 INSERT INTO `tbstaff` VALUES ('2', '1', 'Test Test', 'test', 'tres', 'dghgd', 'kjhgkjh', 'N', '2022-05-01', '2023-05-01', 'C81E728D9D4C2F636F067F89CC14862C', 'N', 'Admin', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbstaff` VALUES ('CMD0001', '1', 'Jiranuwat Tuntakij', 'Programmer', 'test', '123458', 'test', 'Y', '2022-05-30', '0000-00-00', 'D41D8CD98F00B204E9800998ECF8427E', 'N', 'User', '2022-05-30', 'Test', '2022-05-30', 'test');
+INSERT INTO `tbstaff` VALUES ('3', '1', 'Jiranuwat Tuntakij', 'Programmer', 'test', '123458', 'test', 'Y', '2022-05-30', '0000-00-00', 'D41D8CD98F00B204E9800998ECF8427E', 'N', 'User', '2022-05-30', 'Test', '2022-05-30', 'test');
 
 -- ----------------------------
 -- Table structure for tbtimestamp
@@ -264,25 +274,27 @@ CREATE TABLE `tbtimestamp`  (
   `editDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `editBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`timestampID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tbtimestamp
 -- ----------------------------
-INSERT INTO `tbtimestamp` VALUES (11, '1', '0', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (12, '2', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (13, 'CMD0001', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (14, '6', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (15, '7', '2', '2', '2022-04-28', '2022-05-29', 'Test', '2022-06-04', 'จิรานุวัฒน์ ตุณทกิจ');
-INSERT INTO `tbtimestamp` VALUES (16, '8', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (17, '9', '1', '1', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (18, '10', '2', '2', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (19, '11', '3', '3', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (20, '12', '4', '4', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (21, '13', '5', '5', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (22, '14', '6', '6', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (23, '15', '7', '7', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
-INSERT INTO `tbtimestamp` VALUES (24, '16', '8', '8', '2022-04-28', '2022-05-29', 'Test', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (1, '1', '4', '7', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ');
+INSERT INTO `tbtimestamp` VALUES (2, '2', '4', '4', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (3, '3', '4', '4', '2022-06-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (4, '4', '4', '4', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (5, '5', '4', '4', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (6, '6', '4', '4', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (7, '7', '4', '4', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (8, '8', '4', '4', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (9, '9', '1', '1', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (10, '10', '2', '2', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (11, '11', '3', '3', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (12, '12', '4', '4', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (13, '13', '5', '5', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (14, '14', '6', '6', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (15, '15', '7', '7', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbtimestamp` VALUES (16, '16', '8', '8', '2022-04-28', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tbwarning
@@ -291,39 +303,78 @@ DROP TABLE IF EXISTS `tbwarning`;
 CREATE TABLE `tbwarning`  (
   `warnID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `staffID` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `warnDetail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `warn1` int(1) NULL DEFAULT NULL COMMENT 'วาจา',
-  `warn2` int(1) NULL DEFAULT NULL COMMENT 'อักษร1',
-  `warn3` int(1) NULL DEFAULT NULL COMMENT 'อักษร2',
-  `warn4` int(1) NULL DEFAULT NULL COMMENT 'อักษร3',
+  `warnDetail` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `warnDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `addDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `addBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `editDate` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `editBy` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`warnID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tbwarning
 -- ----------------------------
-INSERT INTO `tbwarning` VALUES (3, '1', 'ไม่ดำเนินการเรื่องแชท 1-1', 0, 1, 0, 0, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbwarning` VALUES (4, '1', 'ไม่แก้ไขงานทำให้น้ำเสียไม่ได้ตามมาตรฐาน', 1, 0, 0, 0, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbwarning` VALUES (5, '3', 'ไม่แก้ไขงานทำให้น้ำเสียไม่ได้ตามมาตรฐาน', 1, 0, 0, 0, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbwarning` VALUES (6, 'CR003665', 'ไม่แก้ไขงานทำให้น้ำเสียไม่ได้ตามมาตรฐาน', 1, 0, 0, 0, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbwarning` VALUES (7, 'CR003692', 'ไม่บันทึกเวลาเข้า-ออกให้สมบูรณ์', 1, 0, 0, 0, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbwarning` VALUES (8, 'CR003678', 'หลับในเวลาปฏิบัติงาน', 0, 1, 0, 0, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbwarning` VALUES (9, 'CR003807', 'ตรวจ Daily IPMS เรื่องสระว่ายน้ำไม่ถูกต้อง', 0, 1, 0, 0, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbwarning` VALUES (10, 'CR001869', 'ไม่ตรวจสอบงานของผู้ใต้บังคับบัญชา', 0, 0, 1, 0, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbwarning` VALUES (11, 'CR002268', 'ไม่ปฏิบัติงานให้ได้ตามแผนงาน (สระว่ายน้ำ)', 0, 1, 0, 0, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbwarning` VALUES (12, 'CR003380', 'ไม่ปฏิบัติงานให้ได้ตามแผนงาน (สระว่ายน้ำ)', 0, 1, 0, 0, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
-INSERT INTO `tbwarning` VALUES (13, 'CR003059', 'ละเลยการตอบกลับข้อความลูกบ้านทาง Smart world', 0, 1, 0, 0, '2022-01-10', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ', '2022-05-30', 'จิรานุวัฒน์ ตุณทกิจ');
+INSERT INTO `tbwarning` VALUES (14, '1', 'บุคคลภายนอกเข้าพื้นที่ test', '2022-04-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ');
+INSERT INTO `tbwarning` VALUES (15, '2', 'ขาดงาน', '2022-04-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbwarning` VALUES (16, 'CR003446', 'ไม่ดำเนินการเรื่องแชท 1-1', '2022-01-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbwarning` VALUES (17, 'CR001465', 'ไม่แก้ไขงานทำให้น้ำเสียไม่ได้ตามมาตรฐาน', '2022-01-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbwarning` VALUES (18, 'CR002925', 'ไม่แก้ไขงานทำให้น้ำเสียไม่ได้ตามมาตรฐาน', '2022-01-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbwarning` VALUES (19, 'CR003665', 'ไม่แก้ไขงานทำให้น้ำเสียไม่ได้ตามมาตรฐาน', '2022-01-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbwarning` VALUES (20, 'CR003692', 'ไม่บันทึกเวลาเข้า-ออกให้สมบูรณ์', '2022-01-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbwarning` VALUES (21, 'CR003678', 'หลับในเวลาปฏิบัติงาน', '2022-01-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbwarning` VALUES (22, 'CR003807', 'ตรวจ Daily IPMS เรื่องสระว่ายน้ำไม่ถูกต้อง', '2022-01-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbwarning` VALUES (23, 'CR001869', 'ไม่ตรวจสอบงานของผู้ใต้บังคับบัญชา', '2022-01-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbwarning` VALUES (24, 'CR002268', 'ไม่ปฏิบัติงานให้ได้ตามแผนงาน (สระว่ายน้ำ)', '2022-01-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbwarning` VALUES (25, 'CR003380', 'ไม่ปฏิบัติงานให้ได้ตามแผนงาน (สระว่ายน้ำ)', '2022-01-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
+INSERT INTO `tbwarning` VALUES (26, 'CR003059', 'ละเลยการตอบกลับข้อความลูกบ้านทาง Smart world', '2022-01-10', '2022-07-05', 'จิรานุวัฒน์ ตุณทกิจ', NULL, NULL);
 
 -- ----------------------------
 -- View structure for v_emp
 -- ----------------------------
 DROP VIEW IF EXISTS `v_emp`;
 CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_emp` AS SELECT
+	tbstaff.staffID,
+	tbstaff.staffNameTH,
+	tbstaff.staffPosition,
+	tbsite.siteName,
+	#Commu
+	tbemp.CUMMU_Target,
+	tbemp.CUMMU_Actual,
+IF
+	( tbemp.CUMMU_Actual >= tbemp.CUMMU_Target, 1, 0 ) AS ResultCommu,
+	#Late
+	tbemp.Late_Target,
+	tbemp.Late_Actual,
+IF
+	( tbemp.Late_Actual >= tbemp.Late_Target, 1, 0 ) AS ResultLate ,
+	#Absence
+	tbemp.Absence_Target,
+	tbemp.Absence_Actual,
+IF
+	( tbemp.Absence_Actual >= tbemp.Absence_Target, 1, 0 ) AS ResultAbsence,
+	#Complaint
+	( SELECT COUNT( staffID ) AS ComplantCount FROM tbcomplaint WHERE staffID = tbstaff.staffID AND MONTH(tbcomplaint.complaintDate) = MONTH(tbemp.empDate) AND YEAR(tbcomplaint.complaintDate) = YEAR(tbemp.empDate)) AS ComplantActual,
+IF
+	( ( SELECT COUNT( staffID ) AS ComplantCount FROM tbcomplaint WHERE staffID = tbstaff.staffID AND MONTH(tbcomplaint.complaintDate) = MONTH(tbemp.empDate) AND YEAR(tbcomplaint.complaintDate) = YEAR(tbemp.empDate)) > 0, 0, 1 ) AS ResultComplant,
+	#Warn
+	( SELECT COUNT( staffID ) AS WarnCount FROM tbwarning WHERE staffID = tbstaff.staffID AND MONTH(tbwarning.warnDate) = MONTH(tbemp.empDate) AND YEAR(tbwarning.warnDate) = YEAR(tbemp.empDate)) AS WarnActual,
+IF
+	( ( SELECT COUNT( staffID ) AS WarnCount FROM tbwarning WHERE staffID = tbstaff.staffID AND MONTH(tbwarning.warnDate) = MONTH(tbemp.empDate) AND YEAR(tbwarning.warnDate) = YEAR(tbemp.empDate)) > 0, 0, 1 ) AS ResultWarn,
+	IF
+	( ( SELECT COUNT( staffID ) AS WarnCount FROM tbwarning WHERE staffID = tbstaff.staffID AND MONTH(tbwarning.warnDate) = MONTH(tbemp.empDate) AND YEAR(tbwarning.warnDate) = YEAR(tbemp.empDate)) > 0, 0, 1 ) AS ResultStatus,
+	MONTH(tbemp.empDate) AS Month,
+	YEAR(tbemp.empDate) AS Year
+FROM
+	tbemp
+	INNER JOIN tbstaff ON tbemp.staffID = tbstaff.staffID
+	INNER JOIN tbsite ON tbsite.siteID = tbstaff.siteID ;
+
+-- ----------------------------
+-- View structure for v_emp_old
+-- ----------------------------
+DROP VIEW IF EXISTS `v_emp_old`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_emp_old` AS SELECT
 	tbstaff.staffID,
 	tbstaff.staffNameTH,
 	tbsite.siteName,
@@ -341,11 +392,13 @@ IF
 	( ( SELECT COUNT( staffID ) AS ComplantCount FROM tbcomplaint WHERE staffID = tbstaff.staffID ) > 0, 0, 1 ) AS ResultComplant,
 	( SELECT COUNT( staffID ) AS WarnCount FROM tbwarning WHERE staffID = tbstaff.staffID ) AS WarnActual,
 IF
-	( ( SELECT COUNT( staffID ) AS WarnCount FROM tbwarning WHERE staffID = tbstaff.staffID ) > 0, 0, 1 ) AS ResultWarn
+	( ( SELECT COUNT( staffID ) AS WarnCount FROM tbwarning WHERE staffID = tbstaff.staffID ) > 0, 0, 1 ) AS ResultWarn,
+	MONTH ( tbtimestamp.timestampDate ) AS MONTH,
+	YEAR ( tbtimestamp.timestampDate ) AS YEAR 
 FROM
-	tbstaff
-	LEFT OUTER JOIN tbsite ON tbsite.siteID = tbstaff.siteID
-	LEFT OUTER JOIN tbcommu ON tbcommu.staffID = tbstaff.staffID
-	LEFT OUTER JOIN tbtimestamp ON tbtimestamp.staffID = tbstaff.staffID ;
+	tbtimestamp
+	INNER JOIN tbstaff ON tbtimestamp.staffID = tbstaff.staffID
+	INNER JOIN tbsite ON tbsite.siteID = tbstaff.siteID
+	INNER JOIN tbcommu ON tbcommu.staffID = tbstaff.staffID ;
 
 SET FOREIGN_KEY_CHECKS = 1;

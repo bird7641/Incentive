@@ -50,52 +50,48 @@ if (isset($_POST["action"])) {
 
             $staffID_head = $sheetData[0][0];
             $warnDetail_head = $sheetData[0][1];
-            $warn1_head = $sheetData[0][2];
+            /*   $warn1_head = $sheetData[0][2];
             $warn2_head = $sheetData[0][3];
             $warn3_head = $sheetData[0][4];
-            $warn4_head = $sheetData[0][5];
-            $warnDate_head = $sheetData[0][6];
+            $warn4_head = $sheetData[0][5]; */
+            $warnDate_head = $sheetData[0][2];
 
 
-            if ($staffID_head == 'staffID' && $warnDetail_head == 'warnDetail' && $warn1_head == 'warn1' && $warn2_head == 'warn2' && $warn3_head == 'warn3' && $warn4_head == 'warn4' && $warnDate_head == 'warnDate') {
+            if ($staffID_head == 'staffID' && $warnDetail_head == 'warnDetail' && $warnDate_head == 'warnDate') {
                 for ($i = 1; $i < count($sheetData); $i++) {
 
                     $staffID = $sheetData[$i][0];
                     $warnDetail = $sheetData[$i][1];
-                    $warn1 = $sheetData[$i][2];
+                    /*  $warn1 = $sheetData[$i][2];
                     $warn2 = $sheetData[$i][3];
                     $warn3 = $sheetData[$i][4];
-                    $warn4 = $sheetData[$i][5];
-                    $warnDate = $sheetData[$i][6];
+                    $warn4 = $sheetData[$i][5]; */
+                    $warnDate = $sheetData[$i][2];
 
 
                     $month = date("m", strtotime($warnDate));
                     $year = date("Y", strtotime($warnDate));
-                    $sql_check = "SELECT COUNT(staffID) AS countID FROM tbwarning WHERE staffID = '" . $staffID . "' AND ( MONTH(warnDate) = '" . $month . "' AND YEAR(warnDate) = '" . $year . "' )";
+                    /*   $sql_check = "SELECT COUNT(staffID) AS countID FROM tbwarning WHERE staffID = '" . $staffID . "' AND ( MONTH(warnDate) = '" . $month . "' AND YEAR(warnDate) = '" . $year . "' )";
                     $query_check = $conn->query($sql_check);
                     $result_check = $query_check->fetch_array(MYSQLI_ASSOC);
 
-                    $countID =  $result_check['countID'];
+                    $countID =  $result_check['countID']; */
 
-                    if ((int)$countID != 0) {
+                    /*  if ((int)$countID != 0) {
                         echo "รหัสพนักงาน : " . $staffID . " | เดือน : " . $month . " | ปี : " . $year . " มีอยู่ในระบบแล้ว \n";
-                    } else {
+                    } else { */
 
-                        $sql = "INSERT INTO tbwarning(staffID,
+                    $sql = "INSERT INTO tbwarning(staffID,
                         warnDetail,
-                        warn1,
-                        warn2,
-                        warn3,
-                        warn4,
                         warnDate,
                         addDate,
                         addBy
-                        ) VALUES('" . $staffID . "', '" . $warnDetail . "', '" . $warn1 . "', '" . $warn2 . "', '" . $warn3 . "', '" . $warn4 . "','" . $warnDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
+                        ) VALUES('" . $staffID . "', '" . $warnDetail . "','" . $warnDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
 
-                        $query_timestamp = $conn->query($sql);
+                    $query_timestamp = $conn->query($sql);
 
-/* 
-                        if ($warn1 == 1) {
+
+                    /*   if ($warn1 == 1) {
                             $warn_emp = 1;
                         } elseif ($warn2 == 1) {
                             $warn_emp = 1;
@@ -105,9 +101,9 @@ if (isset($_POST["action"])) {
                             $warn_emp = 1;
                         } else {
                             $warn_emp = 0;
-                        } */
+                        }
 
-                    /*     $sql_check_emp = "SELECT COUNT(staffID) AS countemp FROM tbemp WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
+                            $sql_check_emp = "SELECT COUNT(staffID) AS countemp FROM tbemp WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
                         $query_check_emp = $conn->query($sql_check_emp);
                         $result_check_emp = $query_check_emp->fetch_array(MYSQLI_ASSOC);
 
@@ -130,11 +126,11 @@ if (isset($_POST["action"])) {
 
                         $query_emp = $conn->query($sql_emp); */
 
-                        if ($query_timestamp ) {
-                        } else {
-                            echo "Error";
-                        }
+                    if ($query_timestamp) {
+                    } else {
+                        echo "Error";
                     }
+                    //}
                 }
                 echo "บันทึกข้อมูล สำเร็จ";
             } else {
@@ -150,10 +146,6 @@ if (isset($_POST["action"])) {
             $stmt = "SELECT warnID,
             tbwarning.staffID,
             warnDetail,
-            warn1,
-            warn2,
-            warn3,
-            warn4,
             warnDate,
             staffNameTH
              FROM tbwarning LEFT OUTER JOIN tbstaff ON tbstaff.staffID = tbwarning.staffID WHERE warnID = '" . $_POST["id_warning_edit"] . "' ";
@@ -172,10 +164,6 @@ if (isset($_POST["action"])) {
 		UPDATE tbwarning
 		SET  
 		warnDetail = '" . $_POST['txt_warnDetail_e'] . "',
-		warn1 = '" . $_POST['txt_warn1_e'] . "',
-        warn2 = '" . $_POST['txt_warn2_e'] . "',
-        warn3 = '" . $_POST['txt_warn3_e'] . "',
-        warn4 = '" . $_POST['txt_warn4_e'] . "',
 		editDate = '" . date("Y-m-d") . "',
 		editBy = '" . $_SESSION['staffNameTH'] . "'
 	

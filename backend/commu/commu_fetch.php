@@ -6,18 +6,35 @@
 //session_start();
 include("../../backend/dblink.php");
 
-/* $hidden_list_ap_search = $_POST["hidden_list_ap_search"];
-
-$hidden_list_TP_search = $_POST["hidden_list_TP_search"];
- */
+$textsearch = $_POST["textsearch"];
+$textsearchMonth = $_POST["textsearchMonth"];
+$textsearchYear = $_POST["textsearchYear"];
+ 
 $stmt = "SELECT
-commuID,
-commuActual,
-commuDate,
-staffNameTH 
+tbcommu.commuID,
+tbcommu.commuActual,
+tbcommu.commuDate,
+tbstaff.staffNameTH 
 FROM
 tbcommu
 LEFT OUTER JOIN tbstaff ON tbstaff.staffID = tbcommu.staffID ";
+
+
+if ($textsearch != "" && $textsearchMonth != "" && $textsearchYear != "") {
+    $stmt = $stmt . "WHERE (tbstaff.staffID LIKE '%" . $textsearch . "%' OR tbstaff.staffNameTH LIKE '%" . $textsearch . "%' ) AND MONTH(tbcommu.commuDate) = '" . $textsearchMonth . "' AND YEAR(tbcommu.commuDate) = '" . $textsearchYear . "' ";
+} elseif ($textsearch != "" && $textsearchMonth != "") {
+    $stmt = $stmt . "WHERE (tbstaff.staffID LIKE '%" . $textsearch . "%' OR tbstaff.staffNameTH LIKE '%" . $textsearch . "%' ) AND MONTH(tbcommu.commuDate) = '" . $textsearchMonth . "'  ";
+} elseif ($textsearch != ""  && $textsearchYear != "") {
+    $stmt = $stmt . "WHERE (tbstaff.staffID LIKE '%" . $textsearch . "%' OR tbstaff.staffNameTH LIKE '%" . $textsearch . "%' ) AND YEAR(tbcommu.commuDate) = '" . $textsearchYear . "'  ";
+} elseif ($textsearchMonth != "" && $textsearchYear != "") {
+    $stmt = $stmt . "WHERE  MONTH(tbcommu.commuDate) = '" . $textsearchMonth . "' AND YEAR(tbcommu.commuDate) = '" . $textsearchYear . "'  ";
+} elseif ($textsearch != "") {
+    $stmt = $stmt . "WHERE  (tbstaff.staffID LIKE '%" . $textsearch . "%' OR tbstaff.staffNameTH LIKE '%" . $textsearch . "%' )  ";
+} elseif ($textsearchMonth != "") {
+    $stmt = $stmt . "WHERE MONTH(tbcommu.commuDate) = '" . $textsearchMonth . "' ";
+} elseif ($textsearchYear != "") {
+    $stmt = $stmt . "WHERE YEAR(tbcommu.commuDate) = '" . $textsearchYear . "' ";
+}
 
 $stmt = $stmt . "ORDER BY tbstaff.staffID ASC";
 //$stmt = $stmt . "WHERE partnerStatus = 'Y' AND partnerName LIKE '%".$_POST['query']."%' ";

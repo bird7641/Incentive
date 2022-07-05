@@ -4,31 +4,34 @@
 //session_start();
 include("../../backend/dblink.php");
 
-/* $hidden_list_ap_search = $_POST["hidden_list_ap_search"];
+$textsearch_staff = $_POST["textsearch_staff"];
 
-$hidden_list_TP_search = $_POST["hidden_list_TP_search"];
- */
 $stmt = "SELECT 
-staffID,
+tbstaff.staffID,
 tbstaff.siteID,
-staffNameTH,
-staffPosition,
-staffSection,
-staffProfitCenter,
-staffGroup,
-staffStatus,
-staffStartWorkDate,
-staffEndWorkDate,
-staffLevel,
+tbstaff.staffNameTH,
+tbstaff.staffPosition,
+tbstaff.staffSection,
+tbstaff.staffProfitCenter,
+tbstaff.staffGroup,
+tbstaff.staffStatus,
+tbstaff.staffStartWorkDate,
+tbstaff.staffEndWorkDate,
+tbstaff.staffLevel,
 tbstaff.addDate,
 tbstaff.addBy,
 tbstaff.editDate,
 tbstaff.editBy,
-siteName
-FROM tbstaff LEFT OUTER JOIN tbsite ON tbstaff.siteID = tbsite.siteID WHERE staffStatus != 'N' ";
+tbsite.siteName
+FROM tbstaff 
+LEFT OUTER JOIN tbsite ON tbstaff.siteID = tbsite.siteID ";
 
+if ($textsearch_staff != "") {
+    $stmt = $stmt . "WHERE (tbstaff.staffNameTH LIKE '%" . $textsearch_staff . "%' OR tbstaff.staffID LIKE '%" . $textsearch_staff . "%' ) AND tbstaff.staffStatus != 'N' ";
+}else{
+    $stmt = $stmt . "WHERE  tbstaff.staffStatus != 'N' "; 
+}
 $stmt = $stmt . "ORDER BY tbstaff.staffID ASC";
-//$stmt = $stmt . "WHERE partnerStatus = 'Y' AND partnerName LIKE '%".$_POST['query']."%' ";
 
 $query = $conn->query($stmt);
 
@@ -50,9 +53,6 @@ $query = $conn->query($stmt);
             <th class="text-center" style="vertical-align:middle;font-size: 16px;">
                 โครงการ
             </th>
-
-
-
             <th class="text-center" style="vertical-align:middle;font-size: 16px;">
 
             </th>

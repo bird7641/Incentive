@@ -83,7 +83,7 @@ if (isset($_POST["action"])) {
 
                         $query_timestamp = $conn->query($sql);
 
-                     /*    $sql_check_emp = "SELECT COUNT(staffID) AS countemp FROM tbemp WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
+                        $sql_check_emp = "SELECT COUNT(staffID) AS countemp FROM tbemp WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
                         $query_check_emp = $conn->query($sql_check_emp);
                         $result_check_emp = $query_check_emp->fetch_array(MYSQLI_ASSOC);
 
@@ -105,9 +105,9 @@ if (isset($_POST["action"])) {
                             VALUES('" . $staffID . "','0', '" . $timestampLate . "','0', '" . $timestampAbsence . "', '" . $timestampDate . "', '" . date("Y-m-d") . "', 'test')";
                         }
 
-                        $query_emp = $conn->query($sql_emp); */
+                        $query_emp = $conn->query($sql_emp);
 
-                        if ($query_timestamp ) {
+                        if ($query_timestamp && $query_emp) {
                         } else {
                             echo "Error";
                         }
@@ -137,6 +137,25 @@ if (isset($_POST["action"])) {
 
     if ($_POST["action"] == "edit_timestamp") {
 
+        $stmt_emp = "SELECT * FROM tbtimestamp WHERE timestampID = '" . $_POST["txt_timestampID_e"] . "' ";
+        $query_emp = $conn->query($stmt_emp);
+        $result_emp = $query_emp->fetch_array(MYSQLI_ASSOC);
+        $timestamp_date = $result_emp["timestampDate"];
+        $month = date("m", strtotime($timestamp_date));
+        $year = date("Y", strtotime($timestamp_date));
+
+        $stmt_update_emp = " 
+            UPDATE tbemp
+            SET  
+            Late_Actual = '" . $_POST['txt_timestampLate_e'] . "' ,
+            Absence_Actual = '" . $_POST['txt_timestampAbsence_e'] . "' ,
+            editDate = '" . date("Y-m-d") . "',
+            editBy = '" . $_SESSION['staffNameTH'] . "'
+        
+            WHERE staffID = '" . $result_emp["staffID"] . "'  AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
+
+        $query_update_emp = $conn->query($stmt_update_emp);
+
         $stmt = " 
 		UPDATE tbtimestamp
 		SET  
@@ -151,7 +170,7 @@ if (isset($_POST["action"])) {
 
         $query = $conn->query($stmt);
 
-        if ($query) {
+        if ($query && $query_update_emp) {
             echo 'แก้ไขข้อมูล สำเร็จ ';
         } else {
             echo 'แก้ไขข้อมูล ไม่สำเร็จ!!';
@@ -162,7 +181,7 @@ if (isset($_POST["action"])) {
     if ($_POST["action"] == "del_timestamp") {
         if (isset($_POST["id_timestamp_del"])) {
 
-         /*    $stmt_emp = "SELECT * FROM tbtimestamp WHERE timestampID = '" . $_POST["id_timestamp_del"] . "' ";
+            $stmt_emp = "SELECT * FROM tbtimestamp WHERE timestampID = '" . $_POST["id_timestamp_del"] . "' ";
             $query_emp = $conn->query($stmt_emp);
             $result_emp = $query_emp->fetch_array(MYSQLI_ASSOC);
             $timestamp_date = $result_emp["timestampDate"];
@@ -179,7 +198,7 @@ if (isset($_POST["action"])) {
         
             WHERE staffID = '" . $result_emp["staffID"] . "'  AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
 
-            $query_update_emp = $conn->query($stmt_update_emp); */
+            $query_update_emp = $conn->query($stmt_update_emp);
 
             $stmt = "DELETE FROM tbtimestamp WHERE timestampID = '" . $_POST["id_timestamp_del"] . "'";
             $query = $conn->query($stmt);

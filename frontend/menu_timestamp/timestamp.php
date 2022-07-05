@@ -12,6 +12,45 @@
 
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-12 text-center">
+                        <input type="hidden" class="form-control" id="textsearchYear" name="textsearchYear" placeholder="Search....">
+                        <select class="form-control" id="list_searchYear" name="list_searchYear">
+                            <option value="">เลือกปี</option>
+                            <?php
+
+                            $str_Year = "SELECT distinct YEAR(timestampDate) AS Year from tbtimestamp ORDER BY timestampDate DESC ";
+
+                            $Result_Year = $conn->query($str_Year);
+                            while ($Year_list_Array = $Result_Year->fetch_array(MYSQLI_ASSOC)) {
+                                $Year = $Year_list_Array['Year'];
+                                echo "<option value='" . $Year . "' >" . $Year . "</option>";
+                            }
+                            ?>
+
+                        </select>
+                    </div>
+                    <div class="col-lg-3 col-md-12 text-center">
+                        <input type="hidden" class="form-control" id="textsearchMonth" name="textsearchMonth" placeholder="Search....">
+                        <select class="form-control" id="list_searchMonth" name="list_searchMonth">
+                            <option value="">เลือกเดือน</option>
+                            <?php
+
+                            $str_Month = "SELECT distinct MONTH(timestampDate) AS Month from tbtimestamp ORDER BY timestampDate DESC ";
+
+                            $Result_Month = $conn->query($str_Month);
+                            while ($Month_list_Array = $Result_Month->fetch_array(MYSQLI_ASSOC)) {
+                                $Month = $Month_list_Array['Month'];
+                                echo "<option value='" . $Month . "' >" . $Month . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-12 text-center">
+                        <input type="text" class="form-control" id="textsearch" name="textsearch" placeholder="Search....">
+                    </div>
+
+                </div>
             </div>
             <div class="card-body text-center">
                 <img id="loading_image_table" src="../frontend/img/icon/Spinner_loader.gif" style="display: none;" />
@@ -99,14 +138,17 @@
 
 <script>
     function load_data(query = '') {
-        /*   var hidden_list_ap_search = $('#hidden_list_ap_search').val();
-          var hidden_list_TP_search = $('#hidden_list_TP_search').val(); */
-        // var query2 = $('#hidden_country').val();
+        var textsearch = $('#textsearch').val();
+        var textsearchMonth = $('#textsearchMonth').val();
+        var textsearchYear = $('#textsearchYear').val();
         $.ajax({
             url: "../backend/timestamp/timestamp_fetch.php",
             method: "POST",
             data: {
-                query: query
+                query: query,
+                textsearch: textsearch,
+                textsearchMonth: textsearchMonth,
+                textsearchYear: textsearchYear
             },
             beforeSend: function() {
                 $("#loading_image_table").show();
@@ -124,7 +166,20 @@
         load_data();
     }, 1000);
 
-
+    $('#textsearch').keyup(function() {
+        var textsearch = $(this).val();
+        load_data(textsearch);
+    });
+    $('#list_searchMonth').change(function() {
+        $('#textsearchMonth').val($('#list_searchMonth').val());
+        var textsearchMonth = $('#textsearchMonth').val();
+        load_data(textsearchMonth);
+    });
+    $('#list_searchYear').change(function() {
+        $('#textsearchYear').val($('#list_searchYear').val());
+        var textsearchYear = $('#textsearchYear').val();
+        load_data(textsearchYear);
+    });
 
 
 

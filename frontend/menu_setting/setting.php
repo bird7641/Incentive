@@ -12,6 +12,12 @@
 
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 text-center">
+                        <input type="text" class="form-control" id="textsearch_staff" name="textsearch_staff" placeholder="Search....">
+                    </div>
+                </div>
             </div>
             <div class="card-body text-center">
                 <img id="loading_image_staff_table" src="../frontend/img/icon/Spinner_loader.gif" style="display: none;" />
@@ -30,6 +36,11 @@
                     <div class="col-md-2 ">
                         <button class="btn btn-primary" data-toggle="modal" data-target="#modal_add_site">Add</button>
 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 text-center">
+                        <input type="text" class="form-control" id="textsearch_site" name="textsearch_site" placeholder="Search....">
                     </div>
                 </div>
             </div>
@@ -635,14 +646,13 @@
 <script>
     //staff
     function load_data_staff(query = '') {
-        /*   var hidden_list_ap_search = $('#hidden_list_ap_search').val();
-          var hidden_list_TP_search = $('#hidden_list_TP_search').val(); */
-        // var query2 = $('#hidden_country').val();
+        var textsearch_staff = $('#textsearch_staff').val();
         $.ajax({
             url: "../backend/setting/setting_staff_fetch.php",
             method: "POST",
             data: {
-                query: query
+                query: query,
+                textsearch_staff: textsearch_staff
             },
             beforeSend: function() {
                 $("#loading_image_staff_table").show();
@@ -658,6 +668,7 @@
     }
 
     function load_staffsite_list(query = '') {
+
         $.ajax({
             url: '../backend/setting/setting_staff_listSite_fetch.php',
             type: 'post',
@@ -699,6 +710,13 @@
         load_data_site();
         load_staffsite_list();
     }, 1000);
+
+    $('#textsearch_staff').keyup(function() {
+        var textsearch_staff = $(this).val();
+        load_data_staff(textsearch_staff);
+    });
+
+
 
     $('#frm_upload_file_staff').on('submit', function(event) {
         event.preventDefault();
@@ -910,14 +928,13 @@
 
     //site
     function load_data_site(query = '') {
-        /*   var hidden_list_ap_search = $('#hidden_list_ap_search').val();
-          var hidden_list_TP_search = $('#hidden_list_TP_search').val(); */
-        // var query2 = $('#hidden_country').val();
+        var textsearch_site = $('#textsearch_site').val();
         $.ajax({
             url: "../backend/setting/setting_site_fetch.php",
             method: "POST",
             data: {
-                query: query
+                query: query,
+                textsearch_site: textsearch_site
             },
             beforeSend: function() {
                 $("#loading_image_site_table").show();
@@ -932,7 +949,10 @@
         });
     }
 
-
+    $('#textsearch_site').keyup(function() {
+        var textsearch_site = $(this).val();
+        load_data_site(textsearch_site);
+    });
 
     $('#frm_upload_file_site').on('submit', function(event) {
         event.preventDefault();

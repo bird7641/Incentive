@@ -68,16 +68,16 @@ if (isset($_POST["action"])) {
 
                     $month = date("m", strtotime($complaintDate));
                     $year = date("Y", strtotime($complaintDate));
-                 /*    
+                    /*    
                     $sql_check = "SELECT COUNT(staffID) AS countID FROM tbcomplaint WHERE staffID = '" . $staffID . "' AND ( MONTH(complaintDate) = '" . $month . "' AND YEAR(complaintDate) = '" . $year . "' )";
                     $query_check = $conn->query($sql_check);
                     $result_check = $query_check->fetch_array(MYSQLI_ASSOC);
 
                     $countID =  $result_check['countID']; */
 
-              
 
-                        $sql = "INSERT INTO tbcomplaint(
+
+                    $sql = "INSERT INTO tbcomplaint(
                             staffID,
                             complaintType,
                             complaintDetail,
@@ -87,15 +87,15 @@ if (isset($_POST["action"])) {
                         addBy
                         ) VALUES('" . $staffID . "', '" . $complaintType . "', '" . $complaintDetail . "', '" . $complaintSource . "', '" . $complaintDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
 
-                        $query_complaint = $conn->query($sql);
+                    $query_complaint = $conn->query($sql);
 
-                        /*    $sql_check_emp = "SELECT COUNT(staffID) AS countemp FROM tbemp WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
-                        $query_check_emp = $conn->query($sql_check_emp);
-                        $result_check_emp = $query_check_emp->fetch_array(MYSQLI_ASSOC);
+                   /*  $sql_check_emp = "SELECT COUNT(staffID) AS countemp FROM tbemp WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
+                    $query_check_emp = $conn->query($sql_check_emp);
+                    $result_check_emp = $query_check_emp->fetch_array(MYSQLI_ASSOC);
 
-                        $countemp =  $result_check_emp['countemp'];
-                        if ((int)$countemp != 0) {
-                            $sql_emp = "
+                    $countemp =  $result_check_emp['countemp'];
+                    if ((int)$countemp != 0) {
+                        $sql_emp = "
                             UPDATE tbemp 
                             SET 
                             CUMMU_Target = '4', 
@@ -104,20 +104,19 @@ if (isset($_POST["action"])) {
                             editDate = '" . date("Y-m-d") . "',
 				            editBy = '" . $_SESSION['staffNameTH'] . "'
                             WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
-                            //$_SESSION["staffNameTH"]
-                        } else {
+                        //$_SESSION["staffNameTH"]
+                    } else {
 
-                            $sql_emp = "INSERT INTO tbemp(staffID,CUMMU_Target,CUMMU_Actual,empDate,addDate,addBy) 
+                        $sql_emp = "INSERT INTO tbemp(staffID,CUMMU_Target,CUMMU_Actual,empDate,addDate,addBy) 
                             VALUES('" . $staffID . "','4', '" . $complaintActual . "', '" . $complaintDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
-                        }
+                    }
 
-                        $query_emp = $conn->query($sql_emp); */
+                    $query_emp = $conn->query($sql_emp); */
 
-                        if ($query_complaint) {
-                        } else {
-                            echo "Error";
-                        }
-                    
+                    if ($query_complaint) {
+                    } else {
+                        echo "Error";
+                    }
                 }
                 echo "บันทึกข้อมูล สำเร็จ";
             } else {
@@ -146,9 +145,9 @@ if (isset($_POST["action"])) {
         $stmt = " 
 		UPDATE tbcomplaint
 		SET  
-		complaintType = '" .$_POST["txt_complaintType_e"]. "',
-        complaintDetail = '" .$_POST["txt_complaintDetail_e"]. "',
-        complaintSource = '" .$_POST["txt_complaintSource_e"]. "',
+		complaintType = '" . $_POST["txt_complaintType_e"] . "',
+        complaintDetail = '" . $_POST["txt_complaintDetail_e"] . "',
+        complaintSource = '" . $_POST["txt_complaintSource_e"] . "',
 		editDate = '" . date("Y-m-d") . "',
 		editBy = '" . $_SESSION['staffNameTH'] . "'
 	

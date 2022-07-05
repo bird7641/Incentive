@@ -1,15 +1,10 @@
-
-
 <?php
 
 //fetch.php
 //session_start();
 include("../../backend/dblink.php");
+$textsearch_site = $_POST["textsearch_site"];
 
-/* $hidden_list_ap_search = $_POST["hidden_list_ap_search"];
-
-$hidden_list_TP_search = $_POST["hidden_list_TP_search"];
- */
 $stmt = "SELECT 
 siteID,
 siteName,
@@ -17,10 +12,13 @@ siteType,
 siteDeveloper,
 siteUnit,
 siteStatus
+FROM tbsite   ";
 
-
-
-FROM tbsite  WHERE siteStatus != 'InActive' ";
+if ($textsearch_site != "") {
+    $stmt = $stmt . "WHERE  (siteName LIKE '%" . $textsearch_site . "%' OR siteID LIKE '%" . $textsearch_site . "%' ) AND siteStatus != 'InActive' ";
+} else {
+    $stmt = $stmt . "WHERE  siteStatus != 'InActive' ";
+}
 
 $stmt = $stmt . "ORDER BY siteID ASC";
 //$stmt = $stmt . "WHERE partnerStatus = 'Y' AND partnerName LIKE '%".$_POST['query']."%' ";

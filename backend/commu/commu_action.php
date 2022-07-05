@@ -82,7 +82,7 @@ if (isset($_POST["action"])) {
 
                         $query_commu = $conn->query($sql);
 
-                     /*    $sql_check_emp = "SELECT COUNT(staffID) AS countemp FROM tbemp WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
+                        $sql_check_emp = "SELECT COUNT(staffID) AS countemp FROM tbemp WHERE staffID = '" . $staffID . "' AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
                         $query_check_emp = $conn->query($sql_check_emp);
                         $result_check_emp = $query_check_emp->fetch_array(MYSQLI_ASSOC);
 
@@ -104,9 +104,9 @@ if (isset($_POST["action"])) {
                             VALUES('" . $staffID . "','4', '" . $commuActual . "', '" . $commuDate . "', '" . date("Y-m-d") . "', '" . $_SESSION['staffNameTH'] . "')";
                         }
 
-                        $query_emp = $conn->query($sql_emp); */
+                        $query_emp = $conn->query($sql_emp);
 
-                        if ($query_commu ) {
+                        if ($query_commu) {
                         } else {
                             echo "Error";
                         }
@@ -136,6 +136,27 @@ if (isset($_POST["action"])) {
 
     if ($_POST["action"] == "edit_commu") {
 
+        $stmt_emp = "SELECT * FROM tbcommu WHERE commuID = '" . $_POST["txt_commuID_e"] . "' ";
+        $query_emp = $conn->query($stmt_emp);
+        $result_emp = $query_emp->fetch_array(MYSQLI_ASSOC);
+        $commu_date = $result_emp["commuDate"];
+        $month = date("m", strtotime($commu_date));
+        $year = date("Y", strtotime($commu_date));
+
+        $stmt_update_emp = " 
+            UPDATE tbemp
+            SET  
+            CUMMU_Actual = '" . $_POST['txt_commuActual_e'] . "' ,
+            editDate = '" . date("Y-m-d") . "',
+            editBy = '" . $_SESSION['staffNameTH'] . "'
+        
+            WHERE staffID = '" . $result_emp["staffID"] . "'  AND ( MONTH(empDate) = '" . $month . "' AND YEAR(empDate) = '" . $year . "' )";
+
+        //$_SESSION["staffName"]
+
+        $query_update_emp = $conn->query($stmt_update_emp);
+
+
         $stmt = " 
 		UPDATE tbcommu
 		SET  
@@ -159,7 +180,7 @@ if (isset($_POST["action"])) {
 
     if ($_POST["action"] == "del_commu") {
         if (isset($_POST["id_commu_del"])) {
-           /*  $stmt_emp = "SELECT * FROM tbcommu WHERE commuID = '" . $_POST["id_commu_del"] . "' ";
+            $stmt_emp = "SELECT * FROM tbcommu WHERE commuID = '" . $_POST["id_commu_del"] . "' ";
             $query_emp = $conn->query($stmt_emp);
             $result_emp = $query_emp->fetch_array(MYSQLI_ASSOC);
             $commu_date = $result_emp["commuDate"];
@@ -177,7 +198,7 @@ if (isset($_POST["action"])) {
 
             //$_SESSION["staffName"]
 
-            $query_update_emp = $conn->query($stmt_update_emp); */
+            $query_update_emp = $conn->query($stmt_update_emp);
 
 
             $stmt = "DELETE FROM tbcommu WHERE commuID = '" . $_POST["id_commu_del"] . "'";
